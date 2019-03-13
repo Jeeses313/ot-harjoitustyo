@@ -1,6 +1,6 @@
 # ot-harjoitustyön README otsikko
 
-**Tämä** *on* **_ot-harjoitustyön_** READ~~YUO~~ME.
+**Tämä** *on* **_ot-harjoitustyön_** READ~~YUO~~ME vai onko?
 
 ## Tehtävät
 
