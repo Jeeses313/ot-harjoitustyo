@@ -9,6 +9,8 @@
 
 #### Viikko2
 
+[Unicafe testikattavuus](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/laskarit/viikko2/unicafe_testikattavuus.png)
+
 ## Pong
 
 #### Dokumentaatio
