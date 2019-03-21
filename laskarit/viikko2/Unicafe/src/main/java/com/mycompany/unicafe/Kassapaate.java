@@ -14,7 +14,7 @@ public class Kassapaate {
     public int syoEdullisesti(int maksu) {
         if (maksu >= 240) {
             this.kassassaRahaa = kassassaRahaa + 240;
-            ++this.edulliset;
+            this.edulliset++;
             return maksu - 240;
         } else {
             return maksu;
@@ -23,9 +23,9 @@ public class Kassapaate {
 
     public int syoMaukkaasti(int maksu) {
         if (maksu >= 400) {
-            this.kassassaRahaa = kassassaRahaa + 400;
+            this.kassassaRahaa += 400;
             this.maukkaat++;
-            return maksu - 400;
+            return maksu-400;
         } else {
             return maksu;
         }
