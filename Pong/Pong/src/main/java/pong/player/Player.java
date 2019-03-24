@@ -10,8 +10,8 @@ public abstract class  Player {
 
     private Bat bat;
     
-    public Player(int x, int y) {
-        this.bat = new Bat(x, y);
+    public Player(int x, int y, int movementSpeed) {
+        this.bat = new Bat(x, y, movementSpeed);
     }
 
     public Bat getBat() {
@@ -26,9 +26,9 @@ public abstract class  Player {
         return KeyCode.WINDOWS;
     }
     
-    public int moveBat(int y, int miny, int maxy, Ball ball) {
-        this.bat.move(y, miny, maxy);
-        return y;
+    public int moveBat(int direction, int miny, int maxy, Ball ball) {
+        this.bat.move(direction, miny, maxy);
+        return direction;
     }
     
     public void moveBatTo(int y) {

@@ -13,6 +13,7 @@ import pong.actors.Ball;
 import pong.player.Human;
 import pong.player.Player;
 import pong.Pong;
+import tools.ComponentCreator;
 
 public class NormalGame implements Screen {
 
@@ -30,7 +31,7 @@ public class NormalGame implements Screen {
     private Map<KeyCode, Boolean> pressedButtons;
     private int speedUp;
     private Label pauseText;
-    private Label points; 
+    private Label pointsText;
 
     public NormalGame(boolean twoPlayers) {
         this.endingPoint = 5;
@@ -44,21 +45,21 @@ public class NormalGame implements Screen {
         this.lastPause = System.currentTimeMillis();
         Pane components = new Pane();
         field = new Scene(components, Pong.getStage().getWidth(), Pong.getStage().getHeight());
-        player1 = new Human(KeyCode.W, KeyCode.S, 10, 160);
+        
+        player1 = new Human(KeyCode.W, KeyCode.S, 10, 160, 4);
         if (twoPlayers) {
-            player2 = new Human(KeyCode.UP, KeyCode.DOWN, 770, 160);
+            player2 = new Human(KeyCode.UP, KeyCode.DOWN, 770, 160, 4);
         } else {
-            player2 = new Ai(780, 160);
+            player2 = new Ai(780, 160, 1);
         }
-        ball = new Ball(10, 400, 200, 5);
+        
+        ball = new Ball(10, 400, 200, 8);
         ball.randomMovement();
-        pauseText = new Label("Press " + this.pauseButton.toString() + " to start");
-        pauseText.setFont(new Font(40));
-        pauseText.setTranslateX(230);
-        pauseText.setTranslateY(100);
-        points = new Label(leftPoints + " - " + rightPoints);
-        points.setTranslateX(370);
-        points.setTranslateY(10);
+        
+        pauseText = ComponentCreator.createLabel(230, 100, 40, "Press " + this.pauseButton.toString() + " to start");
+
+        pointsText = ComponentCreator.createLabel(370, 10, leftPoints + " - " + rightPoints);
+
 
         field.setOnKeyPressed(event -> {
             pressedButtons.put(event.getCode(), Boolean.TRUE);
@@ -67,7 +68,7 @@ public class NormalGame implements Screen {
         field.setOnKeyReleased(event -> {
             pressedButtons.put(event.getCode(), Boolean.FALSE);
         });
-        components.getChildren().addAll(player1.getBat().getSprite(), player2.getBat().getSprite(), ball.getSprite(), pauseText, points);
+        components.getChildren().addAll(player1.getBat().getSprite(), player2.getBat().getSprite(), ball.getSprite(), pauseText, pointsText);
     }
 
     @Override
@@ -77,28 +78,29 @@ public class NormalGame implements Screen {
             public void handle(long now) {
                 player1.getBat().setLastMovement(0);
                 player2.getBat().setLastMovement(0);
-                if (pressedButtons.getOrDefault(player1.getDown(), false) && !pause) {
-                    player1.moveBat(10, 0, 400, ball);
-                }
-                if (pressedButtons.getOrDefault(player1.getUp(), false) && !pause) {
-                    player1.moveBat(-10, 0, 400, ball);
-                }
-                if (twoPlayers) {
-                    if (pressedButtons.getOrDefault(player2.getDown(), false) && !pause) {
-                        player2.moveBat(10, 0, 400, ball);
+                if (!pause) {
+                    if (pressedButtons.getOrDefault(player1.getDown(), false) ) {
+                        player1.moveBat(1, 0, 400, ball);
                     }
-                    if (pressedButtons.getOrDefault(player2.getUp(), false) && !pause) {
-                        player2.moveBat(-10, 0, 400, ball);
+                    if (pressedButtons.getOrDefault(player1.getUp(), false)) {
+                        player1.moveBat(-1, 0, 400, ball);
                     }
-                } else {
-                    player2.moveBat(10, 0, 400, ball);
+                    if (twoPlayers) {
+                        if (pressedButtons.getOrDefault(player2.getDown(), false)) {
+                            player2.moveBat(1, 0, 400, ball);
+                        }
+                        if (pressedButtons.getOrDefault(player2.getUp(), false)) {
+                            player2.moveBat(-1, 0, 400, ball);
+                        }
+                    } else {
+                        player2.moveBat(0, 0, 400, ball);
+                    }
                 }
-
                 if (pressedButtons.getOrDefault(pauseButton, false)) {
                     if (System.currentTimeMillis() - lastPause >= 100) {
                         if (pause) {
                             if (leftPoints < endingPoint && rightPoints < endingPoint) {
-                                pauseText.setTranslateX(70);
+                                pauseText.setTranslateX(120);
                                 pauseText.setText("Paused. Press " + pauseButton.toString() + " to unpause");
                                 pause = false;
                                 pauseText.setVisible(false);
@@ -119,7 +121,7 @@ public class NormalGame implements Screen {
 
                 if (ball.collision(player1.getBat())) {
                     ball.speedUp(speedUp);
-                    
+
                 } else if (ball.collision(player2.getBat())) {
                     ball.speedUp(speedUp);
                 }
@@ -151,7 +153,7 @@ public class NormalGame implements Screen {
                     }
                     ball.moveTo(400, 200);
                     ball.randomMovement();
-                    points.setText(leftPoints + " - " + rightPoints);
+                    pointsText.setText(leftPoints + " - " + rightPoints);
                     player1.moveBatTo(160);
                     player2.moveBatTo(160);
                 }

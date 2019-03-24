@@ -1,7 +1,6 @@
 
 package pong;
 
-import pong.actors.Ball;
 import pong.screen.Menu;
 import pong.screen.Screen;
 import javafx.application.Application;
@@ -9,10 +8,6 @@ import javafx.stage.Stage;
 
 
 public class Pong extends Application{
-    private int pisteet1;
-    private int pisteet2;
-    private boolean peliPaalla;
-    private Ball ball;
     public static Stage stage;
     public static Screen screen;
     

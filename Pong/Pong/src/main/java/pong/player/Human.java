@@ -10,8 +10,8 @@ public class Human extends Player{
     private KeyCode up;
     private KeyCode down;
     
-    public Human(KeyCode up, KeyCode down, int x, int y) {
-        super(x,y);
+    public Human(KeyCode up, KeyCode down, int x, int y, int movementSpeed) {
+        super(x,y, movementSpeed);
         this.up = up;
         this.down = down;
         
@@ -33,9 +33,9 @@ public class Human extends Player{
     }
 
     @Override
-    public int moveBat(int y, int miny, int maxy, Ball ball) {
-        super.moveBat(y, miny, maxy, ball); 
-        return y;
+    public int moveBat(int direction, int miny, int maxy, Ball ball) {
+        super.moveBat(direction, miny, maxy, ball); 
+        return direction;
     }
 
     @Override

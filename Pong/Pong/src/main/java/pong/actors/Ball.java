@@ -99,7 +99,9 @@ public class Ball implements Collisionable {
         if (collisionArea.getBoundsInLocal().getWidth() != -1) {
             if (other.getClass() == Bat.class) {
                 Bat bat = (Bat) other;
-                this.mirrorXMovement();
+                if((this.movement.getX() > 0 && bat.getSprite().getTranslateX() > this.sprite.getCenterX() - 20) || (this.movement.getX() < 0 && bat.getSprite().getTranslateX() < this.sprite.getCenterX() + 20)) {
+                    this.mirrorXMovement();
+                }
                 if (this.getYMovement() > 0) {
                     if (bat.getLastMovement() < 0) {
                         this.mirrorYMovement();
