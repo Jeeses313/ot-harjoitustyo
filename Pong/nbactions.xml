@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-test</actionName>
+            <displayName>test</displayName>
+            <goals>
+                <goal>test</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-jacoco</actionName>
+            <displayName>jacoco</displayName>
+            <goals>
+                <goal>test</goal>
+                <goal>jacoco:report</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-compile</actionName>
+            <displayName>compile</displayName>
+            <goals>
+                <goal>compile</goal>
+                <goal>exec:java</goal>
+                <goal>-Dexec.mainClass=pong.Pong</goal>
+            </goals>
+        </action>
+    </actions>
