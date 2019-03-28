@@ -4,78 +4,106 @@ import java.util.Random;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import tools.ComponentCreator;
 
 public class Ball implements Collisionable {
 
     private Circle sprite;
-    private Point2D movement;
+    private double yMovement;
+    private double xMovement;
+    private double xPosition;
+    private double yPosition;
+    private int radius;
     private int speed;
 
     public Ball(int radius, int x, int y, int speed) {
-        this.sprite = new Circle(radius);
-        this.sprite.setTranslateX(x);
-        this.sprite.setTranslateY(y);
+        this.sprite = ComponentCreator.createCircle(radius, x, y);
         this.speed = speed;
-        this.movement = new Point2D(0, 0);
+        this.radius = radius;
+        this.yMovement = 0;
+        this.xMovement = 0;
+        this.moveTo(x, y);
     }
 
+    @Override
     public Shape getSprite() {
         return this.sprite;
     }
 
-    public void setSprite(Circle ball, int x, int y) {
-        this.sprite = ball;
-        this.sprite.setTranslateX(x);
-        this.sprite.setTranslateY(y);
-        this.movement = new Point2D(0, 0);
+    public Point2D getPosition() {
+        return new Point2D(xPosition, yPosition);
+    }
+
+    public void setSprite(int radius, int x, int y) {
+        this.sprite = ComponentCreator.createCircle(radius, x, y);
+        this.setMovement(new Point2D(0, 0));
+        this.yPosition = y;
+        this.xPosition = x;
+        this.radius = radius;
     }
 
     public Point2D getMovement() {
-        return movement;
+        return new Point2D(xMovement, yMovement);
     }
-
     public void setMovement(Point2D movement) {
-        this.movement = movement;
+        this.yMovement = movement.getY();
+        this.xMovement = movement.getX();
     }
 
-    public void speedUp(int multiplier) {
-        this.movement = new Point2D(this.movement.getX() * multiplier, this.movement.getY() * multiplier);
+    public void speedUp(double multiplier) {
+        this.setMovement(new Point2D(this.xMovement * multiplier, this.yMovement * multiplier));
     }
 
     public void move(int miny, int maxy) {
-        this.sprite.setTranslateX(this.sprite.getTranslateX() + this.movement.getX());
-        this.sprite.setTranslateY(this.sprite.getTranslateY() + this.movement.getY());
-        if (this.sprite.getTranslateY() + 35 >= maxy || this.sprite.getTranslateY() <= 0) {
+        this.moveTo(this.xPosition + this.xMovement, this.yPosition + this.yMovement);
+        this.sprite.setTranslateX(this.sprite.getTranslateX() + this.xMovement);
+        this.sprite.setTranslateY(this.sprite.getTranslateY() + this.yMovement);
+        if (this.yPosition + 35 >= maxy || this.yPosition <= miny) {
             this.mirrorYMovement();
         }
 
     }
 
-    public void moveTo(int x, int y) {
+    public void moveTo(double x, double y) {
+        this.xPosition = x;
+        this.yPosition = y;
         this.sprite.setTranslateX(x);
         this.sprite.setTranslateY(y);
     }
 
     public void mirrorYMovement() {
-        this.movement = new Point2D(this.movement.getX(), this.movement.getY() * -1);
+        this.yMovement *= -1;
     }
 
     public void mirrorXMovement() {
-        this.setMovement(new Point2D(-1 * this.movement.getX(), this.movement.getY()));
+        this.xMovement *= -1;
     }
 
     public double getYMovement() {
-        return this.movement.getY();
+        return this.yMovement;
     }
 
     public double getXMovement() {
-        return this.movement.getX();
+        return this.xMovement;
     }
 
-    public void setSize(int size) {
-        this.sprite.setTranslateX(size);
-        this.sprite.setTranslateY(size);
+    public double getxPosition() {
+        return xPosition;
     }
+
+    public double getyPosition() {
+        return yPosition;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+    
+    
 
     public void randomMovement() {
         int newMovement = new Random().nextInt(4);
@@ -99,7 +127,7 @@ public class Ball implements Collisionable {
         if (collisionArea.getBoundsInLocal().getWidth() != -1) {
             if (other.getClass() == Bat.class) {
                 Bat bat = (Bat) other;
-                if((this.movement.getX() > 0 && bat.getSprite().getTranslateX() > this.sprite.getCenterX() - 20) || (this.movement.getX() < 0 && bat.getSprite().getTranslateX() < this.sprite.getCenterX() + 20)) {
+                if((this.xMovement > 0 && bat.getxPosition() > this.sprite.getCenterX() - 20) || (this.xMovement < 0 && bat.getxPosition() < this.sprite.getCenterX() + 20)) {
                     this.mirrorXMovement();
                 }
                 if (this.getYMovement() > 0) {
@@ -118,9 +146,9 @@ public class Ball implements Collisionable {
     }
 
     public int inGoal(int leftGoal, int rightGoal) {
-        if (this.sprite.getTranslateX() <= leftGoal) {
+        if (this.xPosition <= leftGoal) {
             return -1;
-        } else if (this.sprite.getTranslateX() >= rightGoal) {
+        } else if (this.xPosition >= rightGoal) {
             return 1;
         }
         return 0;

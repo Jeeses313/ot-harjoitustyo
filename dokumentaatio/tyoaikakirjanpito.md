@@ -7,4 +7,5 @@
 | 21.3 | 1      |  koodin siirto maven projektiin |
 |23.3 | 2 | helppo, normaali ja vaikea ai, ja asetusten alustus |
 |24.3 | 1 | "työkalujen" alustus ja pienien bugien korjaus |
-|yht. | 9 |  |
+|28.3 | 2 | pallon ja mailan eriyttäminen Shape olioista ja pallon testit
+|yht. | 11 |  |

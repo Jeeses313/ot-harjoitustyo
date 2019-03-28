@@ -44,7 +44,7 @@ public class Menu implements Screen{
             Pong.getStage().close();
         });
         
-        
+        optionsButton.setDisable(true);
         components.getChildren().addAll(title, singleplayerButton, twoplayerButton, optionsButton, exitButton);
     }
     
