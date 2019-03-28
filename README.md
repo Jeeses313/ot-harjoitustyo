@@ -36,4 +36,4 @@ Komento:
 mvn package
 ```
 
-jar. löytyy: _target_
+Jar löytyy: _target_
