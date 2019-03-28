@@ -1,20 +1,17 @@
 
 package pong.actors;
 
-import javafx.geometry.Point2D;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import tools.ComponentCreator;
 
 public class Bat implements Collisionable{
-    private Rectangle sprite;
     private int lastMovement; 
     private int movementSpeed;
     private double yPosition;
     private double xPosition;
     
     public Bat(int x, int y, int movementSpeed) {
-        this.sprite = ComponentCreator.createRectangle(10, 60, x, y);
+
         this.lastMovement = 0;
         this.movementSpeed = movementSpeed;
         this.xPosition = x;
@@ -25,12 +22,10 @@ public class Bat implements Collisionable{
         if(direction > 0) {
             if(this.yPosition + 100 <= maxy) {
                 this.yPosition += movementSpeed;
-                this.sprite.setTranslateY(this.yPosition + movementSpeed);
             }
         } else if(direction < 0) {
             if(this.yPosition > miny) {
-                this.yPosition -= movementSpeed;
-                this.sprite.setTranslateY(this.yPosition- movementSpeed);    
+                this.yPosition -= movementSpeed;  
             }
         }
         this.lastMovement = direction;
@@ -58,10 +53,16 @@ public class Bat implements Collisionable{
     public double getyPosition() {
         return yPosition;
     }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+    
+    
         
     @Override
     public Shape getSprite() {
-        return sprite;
+        return ComponentCreator.createRectangle(10, 60, this.xPosition, this.yPosition);
     }
 
     @Override
@@ -71,7 +72,6 @@ public class Bat implements Collisionable{
     
     public void moveTo(int y) {
         this.yPosition = y;
-        this.sprite.setTranslateY(y);
     }
     
     

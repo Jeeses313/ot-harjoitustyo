@@ -1,11 +1,11 @@
 
 package pong.screen;
 
+import games.NormalGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import pong.Pong;
 import tools.ComponentCreator;
 
@@ -20,14 +20,14 @@ public class Menu implements Screen{
         
         Button singleplayerButton = ComponentCreator.createButton(350, 180, 100, 40, "1 Player");
         singleplayerButton.setOnAction(e -> {
-            NormalGame game = new NormalGame(false);
+            NormalGameScreen game = new NormalGameScreen(new NormalGame(false));
             Pong.setScreen(game);
             game.start();
         });
         
         Button twoplayerButton = ComponentCreator.createButton(350, 220, 100, 40, "2 Player");
         twoplayerButton.setOnAction(e -> {
-            NormalGame game = new NormalGame(true);
+            NormalGameScreen game = new NormalGameScreen(new NormalGame(true));
             Pong.setScreen(game);
             game.start();
         });

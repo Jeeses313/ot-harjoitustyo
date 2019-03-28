@@ -32,14 +32,14 @@ public class ComponentCreator {
         return newButton;
     }
     
-    public static Rectangle createRectangle(int width, int height, int x, int y) {
+    public static Rectangle createRectangle(int width, int height, double x, double y) {
         Rectangle newRectangle = new Rectangle(width, height);
         newRectangle.setTranslateX(x);
         newRectangle.setTranslateY(y);
         return newRectangle;
     }
     
-    public static Circle createCircle(int radius, int x, int y) {
+    public static Circle createCircle(int radius, double x, double y) {
         Circle newCircle = new Circle(radius);
         newCircle.setTranslateX(x);
         newCircle.setTranslateY(y);

@@ -8,7 +8,6 @@ import tools.ComponentCreator;
 
 public class Ball implements Collisionable {
 
-    private Circle sprite;
     private double yMovement;
     private double xMovement;
     private double xPosition;
@@ -17,7 +16,6 @@ public class Ball implements Collisionable {
     private int speed;
 
     public Ball(int radius, int x, int y, int speed) {
-        this.sprite = ComponentCreator.createCircle(radius, x, y);
         this.speed = speed;
         this.radius = radius;
         this.yMovement = 0;
@@ -27,19 +25,15 @@ public class Ball implements Collisionable {
 
     @Override
     public Shape getSprite() {
-        return this.sprite;
+        return  ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
     }
-
+    
+    public Circle getSpriteCircle() {
+        return  ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
+    }
+    
     public Point2D getPosition() {
         return new Point2D(xPosition, yPosition);
-    }
-
-    public void setSprite(int radius, int x, int y) {
-        this.sprite = ComponentCreator.createCircle(radius, x, y);
-        this.setMovement(new Point2D(0, 0));
-        this.yPosition = y;
-        this.xPosition = x;
-        this.radius = radius;
     }
 
     public Point2D getMovement() {
@@ -56,8 +50,6 @@ public class Ball implements Collisionable {
 
     public void move(int miny, int maxy) {
         this.moveTo(this.xPosition + this.xMovement, this.yPosition + this.yMovement);
-        this.sprite.setTranslateX(this.sprite.getTranslateX() + this.xMovement);
-        this.sprite.setTranslateY(this.sprite.getTranslateY() + this.yMovement);
         if (this.yPosition + 35 >= maxy || this.yPosition <= miny) {
             this.mirrorYMovement();
         }
@@ -67,8 +59,6 @@ public class Ball implements Collisionable {
     public void moveTo(double x, double y) {
         this.xPosition = x;
         this.yPosition = y;
-        this.sprite.setTranslateX(x);
-        this.sprite.setTranslateY(y);
     }
 
     public void mirrorYMovement() {
@@ -123,11 +113,12 @@ public class Ball implements Collisionable {
 
     @Override
     public boolean collision(Collisionable other) {
-        Shape collisionArea = Shape.intersect(this.sprite, other.getSprite());
+        Circle thisSprite = this.getSpriteCircle();
+        Shape collisionArea = Shape.intersect(thisSprite, other.getSprite());
         if (collisionArea.getBoundsInLocal().getWidth() != -1) {
             if (other.getClass() == Bat.class) {
                 Bat bat = (Bat) other;
-                if((this.xMovement > 0 && bat.getxPosition() > this.sprite.getCenterX() - 20) || (this.xMovement < 0 && bat.getxPosition() < this.sprite.getCenterX() + 20)) {
+                if((this.xMovement > 0 && bat.getxPosition() > thisSprite.getCenterX() - 20) || (this.xMovement < 0 && bat.getxPosition() < thisSprite.getCenterX() + 20)) {
                     this.mirrorXMovement();
                 }
                 if (this.getYMovement() > 0) {
