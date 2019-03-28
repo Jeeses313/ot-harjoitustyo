@@ -1,8 +1,8 @@
-# Pong (ot-harjoitustyö)
+# Pong
 
-Oma versioni Pong pelistä ja Ohjelmistotekniikan harjoitustyö.
+Oma versioni Pong pelistä, joka toimii Ohjelmistotekniikan harjoitustyönä.
 
-### Dokumentaatio
+## Dokumentaatio
 
 [Käyttöohje](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
@@ -10,30 +10,30 @@ Oma versioni Pong pelistä ja Ohjelmistotekniikan harjoitustyö.
 
 [Työaikakirjanpito](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
-### Komentorivitoiminnot
+## Komentorivitoiminnot
 
-#### Testaus
+### Testaus
 
-Testit suoritetaan komennolla
+Testit komennolla:
 
 ```
 mvn test
 ```
 
-Testikattavuusraportti luodaan komennolla
+Testikattavuusraportti komennolla:
 
 ```
 mvn jacoco:report
 ```
 
-Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
+Kattavuusraportti löytyy: _target/site/jacoco/index.html_
 
-#### Suoritettavan jarin generointi
+### Suoritettavan jarin generointi
 
-Komento
+Komento:
 
 ```
 mvn package
 ```
 
-generoi hakemistoon _target_ suoritettavan jar-tiedoston _OtmTodoApp-1.0-SNAPSHOT.jar_
+jar. löytyy: _target_
