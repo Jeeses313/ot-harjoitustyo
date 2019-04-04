@@ -11,6 +11,10 @@ public class Configurations {
     public Configurations(String fileName) {
         this.configs = configurationDao.initConfigurations("config.properties");
     }
+    
+    public void resetConfigs() {
+        this.configs = configurationDao.resetConfigurations();
+    }
 
     public int getDifficulty() {
         return Integer.parseInt(this.configs.get("difficulty"));
@@ -50,6 +54,10 @@ public class Configurations {
 
     public int getBatSpeed() {
         return Integer.parseInt(this.configs.get("BatSpeed"));
+    }
+    
+    public int getPowerups() {
+        return Integer.parseInt(this.configs.get("powerups"));
     }
 
     public void setDifficulty(int difficulty) {
@@ -100,6 +108,11 @@ public class Configurations {
     public void setBatSpeed(int batSpeed) {
         this.configs.put("BatSpeed", batSpeed + "");
         configurationDao.setProperty("BatSpeed", batSpeed + "");
+    }
+    
+    public void setPowerups(int powerups) {
+        this.configs.put("powerups", powerups + "");
+        configurationDao.setProperty("powerups", powerups + "");
     }
 
 }

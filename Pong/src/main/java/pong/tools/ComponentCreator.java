@@ -3,6 +3,7 @@ package pong.tools;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -30,6 +31,14 @@ public class ComponentCreator {
         newButton.setTranslateY(y);
         newButton.setPrefSize(width, height);
         return newButton;
+    }
+    
+    public static RadioButton createRadioButton(int x, int y, int width, int height, String text) {
+        RadioButton newRadioButton = new RadioButton(text);
+        newRadioButton.setTranslateX(x);
+        newRadioButton.setTranslateY(y);
+        newRadioButton.setPrefSize(width, height);
+        return newRadioButton;
     }
     
     public static Rectangle createRectangle(int width, int height, double x, double y) {

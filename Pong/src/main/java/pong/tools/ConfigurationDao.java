@@ -55,9 +55,15 @@ public class ConfigurationDao {
             properties.setProperty("speedUp", "1");
             properties.setProperty("BallSpeed", "8");
             properties.setProperty("BatSpeed", "4");
+            properties.setProperty("powerups", "0");
             properties.store(output, null);
         } catch (Exception f) {
         }
+    }
+    
+    public static HashMap<String,String> resetConfigurations() {
+        initProperties();
+        return fillHashMap();
     }
 
     public static void setProperty(String key, String value) {
