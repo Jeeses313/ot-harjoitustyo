@@ -1,4 +1,4 @@
-package tests.actortests;
+package actortests;
 
 import javafx.scene.shape.Shape;
 import static org.junit.Assert.*;

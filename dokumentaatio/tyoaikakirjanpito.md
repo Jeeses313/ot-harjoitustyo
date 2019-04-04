@@ -9,4 +9,5 @@
 |24.3 | 1 | "työkalujen" alustus ja pienien bugien korjaus |
 |28.3 | 4 | pelin eriyttäminen grafiikasta, ja pallon ja mailan testit
 |3.4 | 3 | asetusten muuttaminen config.properties tiedoston avulla  ja checkstyle korjauksia|
+|4.4 | 2 | pelaajiin liittyvät testit |
 |yht. | 16 |  |

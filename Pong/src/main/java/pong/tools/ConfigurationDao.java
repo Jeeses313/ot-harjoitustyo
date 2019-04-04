@@ -15,7 +15,7 @@ public class ConfigurationDao {
 
     public static HashMap<String, String> initConfigurations(String file) {
         fileName = file;
-        HashMap<String, String> configs = new HashMap<>();
+        HashMap<String, String> configs = null;
         properties = new Properties();
         try {
             InputStream input = new FileInputStream(fileName);
@@ -23,6 +23,13 @@ public class ConfigurationDao {
         } catch (Exception e) {
             initProperties();
         }
+        configs = fillHashMap();
+
+        return configs;
+    }
+
+    public static HashMap<String, String> fillHashMap() {
+        HashMap<String, String> configs = new HashMap<>();
         try {
             Enumeration<?> e = properties.propertyNames();
             while (e.hasMoreElements()) {

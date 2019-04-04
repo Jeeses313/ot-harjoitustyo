@@ -1,4 +1,4 @@
-package tests.actortests;
+package actortests;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;

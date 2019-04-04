@@ -16,13 +16,9 @@ public abstract class Player {
         return bat;
     }
 
-    public KeyCode getUp() {
-        return KeyCode.WINDOWS;
-    }
+    public abstract KeyCode getUp();
 
-    public KeyCode getDown() {
-        return KeyCode.WINDOWS;
-    }
+    public abstract KeyCode getDown();
 
     public int moveBat(int direction, int miny, int maxy, Ball ball) {
         this.bat.move(direction, miny, maxy);

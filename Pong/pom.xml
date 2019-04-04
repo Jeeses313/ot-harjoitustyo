@@ -58,7 +58,7 @@
                     <excludes>
                         <exclude>pong/screen/*</exclude>
                         <exclude>pong/Pong.class</exclude>
-                        <exclude>pong/player/Player.class</exclude>
+                        <exclude>pong/tools/ComponentCreator.class</exclude>
                     </excludes>
                 </configuration>    
                 <executions>

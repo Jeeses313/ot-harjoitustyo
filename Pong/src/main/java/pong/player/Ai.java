@@ -10,7 +10,7 @@ public class Ai extends Player {
 
     public Ai(int x, int y, int difficulty) {
         super(x, y, 0);
-        if (difficulty >= 0) {
+        if (difficulty <= 0) {
             super.getBat().setMovementSpeed(5);
         } else if (difficulty == 1) {
             super.getBat().setMovementSpeed(3);
@@ -28,7 +28,7 @@ public class Ai extends Player {
 
     @Override
     public int moveBat(int direction, int miny, int maxy, Ball ball) {
-        if (this.difficulty == 0) {
+        if (this.difficulty <= 0) {
             if (ball.getSprite().getTranslateY() > super.getBat().getSprite().getTranslateY()) {
                 return super.moveBat(1, miny, maxy, ball);
             } else if (ball.getSprite().getTranslateY() < super.getBat().getSprite().getTranslateY()) {
@@ -46,13 +46,15 @@ public class Ai extends Player {
 
     @Override
     public KeyCode getDown() {
-        return super.getDown();
+        return null;
     }
 
     @Override
     public KeyCode getUp() {
-        return super.getUp();
+        return null;
     }
+
+    
 
     @Override
     public void moveBatTo(int y) {
