@@ -4,7 +4,7 @@ import java.util.Random;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import tools.ComponentCreator;
+import pong.tools.ComponentCreator;
 
 public class Ball implements Collisionable {
 
@@ -25,13 +25,13 @@ public class Ball implements Collisionable {
 
     @Override
     public Shape getSprite() {
-        return  ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
+        return ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
     }
-    
+
     public Circle getSpriteCircle() {
-        return  ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
+        return ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
     }
-    
+
     public Point2D getPosition() {
         return new Point2D(xPosition, yPosition);
     }
@@ -39,6 +39,7 @@ public class Ball implements Collisionable {
     public Point2D getMovement() {
         return new Point2D(xMovement, yMovement);
     }
+
     public void setMovement(Point2D movement) {
         this.yMovement = movement.getY();
         this.xMovement = movement.getX();
@@ -92,8 +93,6 @@ public class Ball implements Collisionable {
     public int getSpeed() {
         return speed;
     }
-    
-    
 
     public void randomMovement() {
         int newMovement = new Random().nextInt(4);
@@ -118,22 +117,26 @@ public class Ball implements Collisionable {
         if (collisionArea.getBoundsInLocal().getWidth() != -1) {
             if (other.getClass() == Bat.class) {
                 Bat bat = (Bat) other;
-                if((this.xMovement > 0 && bat.getxPosition() > thisSprite.getCenterX() - 20) || (this.xMovement < 0 && bat.getxPosition() < thisSprite.getCenterX() + 20)) {
+                if ((this.xMovement > 0 && bat.getxPosition() > thisSprite.getCenterX() - 20) || (this.xMovement < 0 && bat.getxPosition() < thisSprite.getCenterX() + 20)) {
                     this.mirrorXMovement();
                 }
-                if (this.getYMovement() > 0) {
-                    if (bat.getLastMovement() < 0) {
-                        this.mirrorYMovement();
-                    }
-                } else {
-                    if (bat.getLastMovement() > 0) {
-                        this.mirrorYMovement();
-                    }
-                }
+                this.checkChangeYDirection(bat);
             }
             return true;
         }
         return false;
+    }
+
+    public void checkChangeYDirection(Bat bat) {
+        if (this.getYMovement() > 0) {
+            if (bat.getLastMovement() < 0) {
+                this.mirrorYMovement();
+            }
+        } else {
+            if (bat.getLastMovement() > 0) {
+                this.mirrorYMovement();
+            }
+        }
     }
 
     public int inGoal(int leftGoal, int rightGoal) {

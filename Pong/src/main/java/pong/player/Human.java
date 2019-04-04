@@ -1,20 +1,19 @@
-
 package pong.player;
 
 import javafx.scene.input.KeyCode;
 import pong.actors.Ball;
 import pong.actors.Bat;
 
+public class Human extends Player {
 
-public class Human extends Player{
     private KeyCode up;
     private KeyCode down;
-    
+
     public Human(KeyCode up, KeyCode down, int x, int y, int movementSpeed) {
-        super(x,y, movementSpeed);
+        super(x, y, movementSpeed);
         this.up = up;
         this.down = down;
-        
+
     }
 
     @Override
@@ -34,7 +33,7 @@ public class Human extends Player{
 
     @Override
     public int moveBat(int direction, int miny, int maxy, Ball ball) {
-        super.moveBat(direction, miny, maxy, ball); 
+        super.moveBat(direction, miny, maxy, ball);
         return direction;
     }
 
@@ -43,8 +42,4 @@ public class Human extends Player{
         super.moveBatTo(y);
     }
 
-    
-    
-    
-    
 }

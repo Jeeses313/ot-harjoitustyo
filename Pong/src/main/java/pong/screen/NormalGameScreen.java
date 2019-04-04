@@ -1,6 +1,6 @@
 package pong.screen;
 
-import games.NormalGame;
+import pong.games.NormalGame;
 import java.util.HashMap;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import pong.Pong;
-import tools.ComponentCreator;
+import pong.tools.ComponentCreator;
 
 public class NormalGameScreen implements Screen {
 

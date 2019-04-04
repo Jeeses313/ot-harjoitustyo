@@ -8,9 +8,11 @@ Oma versioni Pong pelistä, joka toimii Ohjelmistotekniikan harjoitustyönä.
 
 [Vaatimusmäärittely](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
+[Arkkitehtuurikuvaus](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 [Työaikakirjanpito](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
-## Komentorivitoiminnot
+## Komentorivitoiminnot 
 
 ### Testaus
 
@@ -37,3 +39,14 @@ mvn package
 ```
 
 Jar löytyy: _target_
+
+
+### Checkstyle
+
+Tiedostossa [checkstyle.xml](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/Pong/checkstyle.xml) määrittellyt tarkistukset komennolla:
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+Mahdolliset virheilmoitukset löytyy: _target/site/checkstyle.html_

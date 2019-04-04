@@ -1,13 +1,13 @@
 
 package pong.screen;
 
-import games.NormalGame;
+import pong.games.NormalGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import pong.Pong;
-import tools.ComponentCreator;
+import pong.tools.ComponentCreator;
 
 
 public class Menu implements Screen{
