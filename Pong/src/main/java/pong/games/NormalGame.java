@@ -21,7 +21,7 @@ public class NormalGame {
     private boolean pause;
     private KeyCode pauseButton;
     private long lastPause;
-    private int speedUp;
+    private double speedUp;
 
     public NormalGame(boolean twoPlayers) {
         Configurations config = Pong.getConfig();

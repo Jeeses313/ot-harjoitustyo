@@ -9,7 +9,7 @@ public class Configurations {
     private ConfigurationDao configurationDao;
 
     public Configurations(String fileName) {
-        this.configs = configurationDao.initConfigurations("config.properties");
+        this.configs = configurationDao.initConfigurations(fileName);
     }
     
     public void resetConfigs() {
@@ -44,8 +44,8 @@ public class Configurations {
         return Integer.parseInt(this.configs.get("endingpoint"));
     }
 
-    public int getSpeedUp() {
-        return Integer.parseInt(this.configs.get("speedUp"));
+    public double getSpeedUp() {
+        return Double.parseDouble(this.configs.get("speedUp"));
     }
 
     public int getBallSpeed() {
@@ -57,6 +57,7 @@ public class Configurations {
     }
     
     public int getPowerups() {
+        System.out.println(this.configs.get("powerups"));
         return Integer.parseInt(this.configs.get("powerups"));
     }
 
@@ -100,7 +101,7 @@ public class Configurations {
         configurationDao.setProperty("speedUp", speedUp + "");
     }
 
-    public void setBallSpeed(int ballSpeed) {
+    public void setBallSpeed(double ballSpeed) {
         this.configs.put("BallSpeed", ballSpeed + "");
         configurationDao.setProperty("BallSpeed", ballSpeed + "");
     }

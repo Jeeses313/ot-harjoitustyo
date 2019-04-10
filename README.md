@@ -12,6 +12,10 @@ Oma versioni Pong pelistä, joka toimii Ohjelmistotekniikan harjoitustyönä.
 
 [Työaikakirjanpito](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
+## Releaset
+
+[Viikko 5](https://github.com/Jeeses313/ot-harjoitustyo/releases/)
+
 ## Komentorivitoiminnot 
 
 ### Testaus

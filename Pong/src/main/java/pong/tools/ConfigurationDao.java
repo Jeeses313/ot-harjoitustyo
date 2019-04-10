@@ -35,6 +35,7 @@ public class ConfigurationDao {
             while (e.hasMoreElements()) {
                 String key = (String) e.nextElement();
                 String value = properties.getProperty(key);
+                System.out.println(key + "=" + value);
                 configs.put(key, value);
             }
         } catch (Exception e) {
@@ -56,8 +57,10 @@ public class ConfigurationDao {
             properties.setProperty("BallSpeed", "8");
             properties.setProperty("BatSpeed", "4");
             properties.setProperty("powerups", "0");
+            System.out.println("Säilötty");
             properties.store(output, null);
         } catch (Exception f) {
+            System.out.println("Error");
         }
     }
     
