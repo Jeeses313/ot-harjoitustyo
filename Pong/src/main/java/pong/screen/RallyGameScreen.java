@@ -10,27 +10,28 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import pong.Pong;
+import pong.games.RallyGame;
 import pong.tools.ComponentCreator;
 
-public class NormalGameScreen implements Screen {
+public class RallyGameScreen implements Screen {
 
     private HashMap<KeyCode, Boolean> pressedButtons;
 
     private Scene field;
     private Label pauseText;
     private Label pointsText;
-    private NormalGame game;
+    private RallyGame game;
     private Shape ballSprite;
     private Shape player1Sprite;
-    private Shape player2Sprite;
+    private Shape wall;
 
-    public NormalGameScreen(NormalGame game) {
+    public RallyGameScreen(RallyGame game) {
         this.game = game;
         this.pressedButtons = new HashMap<>();
         Pane components = new Pane();
         field = new Scene(components, Pong.getStage().getWidth(), Pong.getStage().getHeight());
         pauseText = ComponentCreator.createLabel(230, 100, 40, "Press " + game.getPauseButton().toString() + " to start");
-        pointsText = ComponentCreator.createLabel(370, 10, game.getLeftPoints() + " - " + game.getRightPoints());
+        pointsText = ComponentCreator.createLabel(370, 10, game.getPoints() + "");
         field.setOnKeyPressed(event -> {
             pressedButtons.put(event.getCode(), Boolean.TRUE);
         });
@@ -38,9 +39,9 @@ public class NormalGameScreen implements Screen {
             pressedButtons.put(event.getCode(), Boolean.FALSE);
         });
         player1Sprite = game.getPlayer1().getBat().getSprite();
-        player2Sprite = game.getPlayer2().getBat().getSprite();
+        wall = game.getWall().getSprite();
         ballSprite = game.getBall().getSprite();
-        components.getChildren().addAll(player1Sprite, player2Sprite, ballSprite, pauseText, pointsText);
+        components.getChildren().addAll(player1Sprite, wall, ballSprite, pauseText, pointsText);
     }
 
     @Override
@@ -66,25 +67,14 @@ public class NormalGameScreen implements Screen {
                 int goalCheck = game.goalCheck();
                 if (goalCheck < 5) {
                     pauseText.setVisible(true);
-                    if (goalCheck == 0 || goalCheck == 1) {
-                        if (goalCheck == 1) {
-                            pauseText.setText("You lost. Press " + game.getPauseButton().toString() + " to return to menu");
-                        }
-                        pauseText.setFont(new Font(30));
-                        pauseText.setTranslateX(120);
-                    } else if (goalCheck == 2) {
-                        pauseText.setText("Player 1 won. Press " + game.getPauseButton().toString() + " to return to menu");
-                        pauseText.setFont(new Font(30));
-                        pauseText.setTranslateX(120);
-                    } else if (goalCheck == 3) {
-                        pauseText.setTranslateX(230);
-                        pauseText.setText("Press " + game.getPauseButton().toString() + " to start");
-                    }
-                    pointsText.setText(game.getLeftPoints() + " - " + game.getRightPoints());
+                    pauseText.setText("You lost. Press " + game.getPauseButton().toString() + " to return to menu");
+                    pauseText.setFont(new Font(30));
+                    pauseText.setTranslateX(120);
                 }
+
+                pointsText.setText(game.getPoints() + "");
                 game.moveBall();
                 player1Sprite.setTranslateY(game.getPlayer1().getBat().getyPosition());
-                player2Sprite.setTranslateY(game.getPlayer2().getBat().getyPosition());
                 ballSprite.setTranslateY(game.getBall().getyPosition());
                 ballSprite.setTranslateX(game.getBall().getxPosition());
             }

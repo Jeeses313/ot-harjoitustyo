@@ -7,6 +7,7 @@
 <suppressions>
     <suppress files="pong.screen.Menu.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="pong.screen.NormalGameScreen.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="pong.screen.RallyGameScreen.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="pong.screen.Options.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="pong.screen.Screen.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

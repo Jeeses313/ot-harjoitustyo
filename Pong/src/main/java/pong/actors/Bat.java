@@ -11,9 +11,11 @@ public class Bat implements Collisionable {
     private double xPosition;
 
     public Bat(int x, int y, int movementSpeed) {
-
         this.lastMovement = 0;
         this.movementSpeed = movementSpeed;
+        if (movementSpeed <= 0) {
+            this.movementSpeed = 4;
+        }
         this.xPosition = x;
         this.yPosition = y;
     }

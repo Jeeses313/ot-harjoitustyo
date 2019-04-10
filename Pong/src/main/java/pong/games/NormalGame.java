@@ -20,6 +20,7 @@ public class NormalGame {
     private Ball ball;
     private boolean pause;
     private KeyCode pauseButton;
+    private KeyCode menuButton;
     private long lastPause;
     private double speedUp;
 
@@ -33,11 +34,12 @@ public class NormalGame {
 
         this.pause = true;
         this.pauseButton = config.getPauseButton();
+        this.menuButton = config.getMenuButton();
         this.speedUp = config.getSpeedUp();
         this.lastPause = System.currentTimeMillis();
         player1 = new Human(config.getPlayer1Up(), config.getPlayer1Down(), 10, 160, config.getBatSpeed());
         if (twoPlayers) {
-            player2 = new Human(config.getPlayer2Up(), config.getPlayer2Down(), 770, 160, config.getBatSpeed());
+            player2 = new Human(config.getPlayer2Up(), config.getPlayer2Down(), 780, 160, config.getBatSpeed());
         } else {
             player2 = new Ai(780, 160, config.getDifficulty());
         }
@@ -91,6 +93,9 @@ public class NormalGame {
                 pause = true;
                 return 2;
             }
+        }
+        if (pause && pressedButtons.getOrDefault(menuButton, false)) {
+            return 1;
         }
         return 3;
 
@@ -170,6 +175,10 @@ public class NormalGame {
 
     public KeyCode getPauseButton() {
         return pauseButton;
+    }
+
+    public KeyCode getMenuButton() {
+        return menuButton;
     }
 
     public Ball getBall() {

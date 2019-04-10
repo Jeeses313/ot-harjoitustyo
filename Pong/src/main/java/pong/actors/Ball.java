@@ -17,6 +17,9 @@ public class Ball implements Collisionable {
 
     public Ball(int radius, int x, int y, int speed) {
         this.speed = speed;
+        if (speed <= 0) {
+            this.speed = 8;
+        }
         this.radius = radius;
         this.yMovement = 0;
         this.xMovement = 0;
@@ -121,6 +124,11 @@ public class Ball implements Collisionable {
                     this.mirrorXMovement();
                 }
                 this.checkChangeYDirection(bat);
+            } else if (other.getClass() == Wall.class) {
+                Wall wall = (Wall) other;
+                if ((this.xMovement > 0 && wall.getxPosition() > thisSprite.getCenterX() - 20) || (this.xMovement < 0 && wall.getxPosition() < thisSprite.getCenterX() + 20)) {
+                    this.mirrorXMovement();
+                }
             }
             return true;
         }

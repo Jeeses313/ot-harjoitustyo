@@ -35,7 +35,6 @@ public class ConfigurationDao {
             while (e.hasMoreElements()) {
                 String key = (String) e.nextElement();
                 String value = properties.getProperty(key);
-                System.out.println(key + "=" + value);
                 configs.put(key, value);
             }
         } catch (Exception e) {
@@ -48,6 +47,7 @@ public class ConfigurationDao {
             OutputStream output = new FileOutputStream(fileName);
             properties.setProperty("difficulty", "1");
             properties.setProperty("pause", "P");
+            properties.setProperty("menu", "M");
             properties.setProperty("Player1_Up", "W");
             properties.setProperty("Player1_Down", "S");
             properties.setProperty("Player2_Up", "Up");
@@ -57,14 +57,12 @@ public class ConfigurationDao {
             properties.setProperty("BallSpeed", "8");
             properties.setProperty("BatSpeed", "4");
             properties.setProperty("powerups", "0");
-            System.out.println("Säilötty");
             properties.store(output, null);
         } catch (Exception f) {
-            System.out.println("Error");
         }
     }
-    
-    public static HashMap<String,String> resetConfigurations() {
+
+    public static HashMap<String, String> resetConfigurations() {
         initProperties();
         return fillHashMap();
     }
