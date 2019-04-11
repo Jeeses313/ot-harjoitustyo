@@ -12,4 +12,4 @@
 |4.4 | 4 | pelaajiin liittyvät testit ja asetus näytön toiminnalisuuden edistys |
 |10.4 | 4|  asetus näkymä, asetuksiin liityvien virheiden käsittely ja rally-peli|
 |11.4 | 3| toistuvan koodin vähennys aseutksien käsittelyssä, seinään ja asetuksiin liittyvät testit |
-|yht. | 26 |  |
+|yht. | 27 |  |
