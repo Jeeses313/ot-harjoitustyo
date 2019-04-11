@@ -10,5 +10,6 @@
 |28.3 | 4 | pelin eriyttäminen grafiikasta, ja pallon ja mailan testit
 |3.4 | 3 | asetusten muuttaminen config.properties tiedoston avulla  ja checkstyle korjauksia|
 |4.4 | 4 | pelaajiin liittyvät testit ja asetus näytön toiminnalisuuden edistys |
-|10.4 | 4|  Asetus näkymä, asetuksiin liityvien virheiden käsittely ja rally-peli|
-|yht. | 24 |  |
+|10.4 | 4|  asetus näkymä, asetuksiin liityvien virheiden käsittely ja rally-peli|
+|11.4 | 3| toistuvan koodin vähennys aseutksien käsittelyssä, seinään ja asetuksiin liittyvät testit |
+|yht. | 26 |  |

@@ -1,4 +1,4 @@
-package pong.screen;
+package pong.ui;
 
 import pong.games.NormalGame;
 import java.util.HashMap;

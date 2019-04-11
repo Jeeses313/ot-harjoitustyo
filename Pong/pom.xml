@@ -56,7 +56,7 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>pong/screen/*</exclude>
+                        <exclude>pong/ui/*</exclude>
                         <exclude>pong/Pong.class</exclude>
                         <exclude>pong/tools/ComponentCreator.class</exclude>
                     </excludes>

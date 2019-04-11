@@ -27,23 +27,23 @@ public class NormalGame {
     public NormalGame(boolean twoPlayers) {
         Configurations config = Pong.getConfig();
         this.twoPlayers = twoPlayers;
-        this.endingPoint = config.getEndingPoint();
+        this.endingPoint = config.getInt("endingpoint", 5);
         this.leftPoints = 0;
         this.rightPoints = 0;
         this.twoPlayers = twoPlayers;
 
         this.pause = true;
-        this.pauseButton = config.getPauseButton();
-        this.menuButton = config.getMenuButton();
-        this.speedUp = config.getSpeedUp();
+        this.pauseButton = config.getKey("pause", KeyCode.P);
+        this.menuButton = config.getKey("menu", KeyCode.M);
+        this.speedUp = config.getDouble("speedUp", 1);
         this.lastPause = System.currentTimeMillis();
-        player1 = new Human(config.getPlayer1Up(), config.getPlayer1Down(), 10, 160, config.getBatSpeed());
+        player1 = new Human(config.getKey("Player1_Up", KeyCode.W), config.getKey("Player1_Down", KeyCode.S), 10, 160, config.getInt("BatSpeed", 4));
         if (twoPlayers) {
-            player2 = new Human(config.getPlayer2Up(), config.getPlayer2Down(), 780, 160, config.getBatSpeed());
+            player2 = new Human(config.getKey("Player2_Up", KeyCode.UP), config.getKey("Player2_Down", KeyCode.DOWN), 770, 160, config.getInt("BatSpeed", 4));
         } else {
-            player2 = new Ai(780, 160, config.getDifficulty());
+            player2 = new Ai(770, 160, config.getInt("difficulty", 1));
         }
-        ball = new Ball(10, 400, 200, config.getBallSpeed());
+        ball = new Ball(10, 400, 200, config.getInt("BallSpeed", 8));
         ball.randomMovement();
     }
 

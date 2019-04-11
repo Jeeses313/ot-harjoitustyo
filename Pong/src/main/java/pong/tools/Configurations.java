@@ -1,11 +1,12 @@
 package pong.tools;
 
+import pong.dao.ConfigurationDao;
 import java.util.HashMap;
 import javafx.scene.input.KeyCode;
 
 public class Configurations {
 
-    private HashMap<String, String> configs;
+    public HashMap<String, String> configs;
     private ConfigurationDao configurationDao;
 
     public Configurations(String fileName) {
@@ -16,178 +17,50 @@ public class Configurations {
         this.configs = configurationDao.resetConfigurations();
     }
 
-    public int getDifficulty() {
-        try {
-            return Integer.parseInt(this.configs.get("difficulty"));
-        } catch (Exception e) {
-            this.setDifficulty(1);
-            return Integer.parseInt(this.configs.get("difficulty"));
-        }
-
-    }
-
-    public KeyCode getPauseButton() {
-        KeyCode key = KeyCode.getKeyCode(this.configs.get("pause"));
+    public KeyCode getKey(String keyName, KeyCode defaultKey) {
+        KeyCode key = KeyCode.getKeyCode(this.configs.get(keyName));
         if (key == null) {
-            key = KeyCode.P;
-            this.setPauseButton(key);
+            try {
+                key = KeyCode.valueOf(this.configs.get(keyName));
+            } catch (Exception e) {
+                key = defaultKey;
+                this.setKey(keyName, key);
+            }
         }
         return key;
     }
 
-    public KeyCode getMenuButton() {
-        KeyCode key = KeyCode.getKeyCode(this.configs.get("menu"));
-        if (key == null) {
-            key = KeyCode.M;
-            this.setMenuButton(key);
-        }
-        return key;
-    }
-
-    public KeyCode getPlayer1Up() {
-        KeyCode key = KeyCode.getKeyCode(this.configs.get("Player1_Up"));
-        if (key == null) {
-            key = KeyCode.W;
-            this.setPlayer1Up(key);
-        }
-        return key;
-    }
-
-    public KeyCode getPlayer1Down() {
-        KeyCode key = KeyCode.getKeyCode(this.configs.get("Player1_Down"));
-        if (key == null) {
-            key = KeyCode.S;
-            this.setPlayer1Down(key);
-        }
-        return key;
-    }
-
-    public KeyCode getPlayer2Up() {
-        KeyCode key = KeyCode.getKeyCode(this.configs.get("Player2_Up"));
-        if (key == null) {
-            key = KeyCode.UP;
-            this.setPlayer2Up(key);
-        }
-        return key;
-    }
-
-    public KeyCode getPlayer2Down() {
-        KeyCode key = KeyCode.getKeyCode(this.configs.get("Player2_Down"));
-        if (key == null) {
-            key = KeyCode.DOWN;
-            this.setPlayer2Down(key);
-        }
-        return key;
-    }
-
-    public int getEndingPoint() {
+    public int getInt(String intName, int defaultInt) {
         try {
-            return Integer.parseInt(this.configs.get("endingpoint"));
+            return Integer.parseInt(this.configs.get(intName));
         } catch (Exception e) {
-            this.setEndingPoint(3);
-            return Integer.parseInt(this.configs.get("endingpoint"));
+            this.setInt(intName, defaultInt);
+            return Integer.parseInt(this.configs.get(intName));
         }
-
     }
 
-    public double getSpeedUp() {
+    public double getDouble(String doubleName, double defaultDouble) {
         try {
-            return Double.parseDouble(this.configs.get("speedUp"));
+            return Double.parseDouble(this.configs.get(doubleName));
         } catch (Exception e) {
-            this.setSpeedUp(1);
-            return Double.parseDouble(this.configs.get("speedUp"));
+            this.setDouble(doubleName, 1);
+            return Double.parseDouble(this.configs.get(doubleName));
         }
 
     }
 
-    public int getBallSpeed() {
-        try {
-            return Integer.parseInt(this.configs.get("BallSpeed"));
-        } catch (Exception e) {
-            this.setBallSpeed(8);
-            return Integer.parseInt(this.configs.get("BallSpeed"));
-        }
-
+    public void setKey(String keyName, KeyCode key) {
+        this.configs.put(keyName, key.toString());
+        configurationDao.setProperty(keyName, key.toString());
     }
 
-    public int getBatSpeed() {
-        try {
-            return Integer.parseInt(this.configs.get("BatSpeed"));
-        } catch (Exception e) {
-            this.setBatSpeed(4);
-            return Integer.parseInt(this.configs.get("BatSpeed"));
-        }
-
+    public void setInt(String intName, int integer) {
+        this.configs.put(intName, integer + "");
+        configurationDao.setProperty(intName, integer + "");
     }
 
-    public int getPowerups() {
-        try {
-            return Integer.parseInt(this.configs.get("powerups"));
-        } catch (Exception e) {
-            this.setPowerups(0);
-            return Integer.parseInt(this.configs.get("powerups"));
-        }
-
+    public void setDouble(String doubleName, double doubleValue) {
+        this.configs.put(doubleName, doubleValue + "");
+        configurationDao.setProperty(doubleName, doubleValue + "");
     }
-
-    public void setDifficulty(int difficulty) {
-        this.configs.put("difficulty", difficulty + "");
-        configurationDao.setProperty("difficulty", difficulty + "");
-    }
-
-    public void setPauseButton(KeyCode pauseButton) {
-        this.configs.put("pause", pauseButton.toString());
-        configurationDao.setProperty("pause", pauseButton.toString());
-    }
-
-    public void setMenuButton(KeyCode menuButton) {
-        this.configs.put("menu", menuButton.toString());
-        configurationDao.setProperty("menu", menuButton.toString());
-    }
-
-    public void setPlayer1Up(KeyCode player1Up) {
-        this.configs.put("Player1_Up", player1Up.toString());
-        configurationDao.setProperty("Player1_Up", player1Up.toString());
-    }
-
-    public void setPlayer1Down(KeyCode player1Down) {
-        this.configs.put("Player1_Down", player1Down.toString());
-        configurationDao.setProperty("Player1_Down", player1Down.toString());
-    }
-
-    public void setPlayer2Up(KeyCode player2Up) {
-        this.configs.put("Player2_Up", player2Up.toString());
-        configurationDao.setProperty("Player2_Up", player2Up.toString());
-    }
-
-    public void setPlayer2Down(KeyCode palyer2Down) {
-        this.configs.put("Player2_Down", palyer2Down.toString());
-        configurationDao.setProperty("Player2_Down", palyer2Down.toString());
-    }
-
-    public void setEndingPoint(int endingpoint) {
-        this.configs.put("endingpoint", endingpoint + "");
-        configurationDao.setProperty("endingpoint", endingpoint + "");
-    }
-
-    public void setSpeedUp(double speedUp) {
-        this.configs.put("speedUp", speedUp + "");
-        configurationDao.setProperty("speedUp", speedUp + "");
-    }
-
-    public void setBallSpeed(int ballSpeed) {
-        this.configs.put("BallSpeed", ballSpeed + "");
-        configurationDao.setProperty("BallSpeed", ballSpeed + "");
-    }
-
-    public void setBatSpeed(int batSpeed) {
-        this.configs.put("BatSpeed", batSpeed + "");
-        configurationDao.setProperty("BatSpeed", batSpeed + "");
-    }
-
-    public void setPowerups(int powerups) {
-        this.configs.put("powerups", powerups + "");
-        configurationDao.setProperty("powerups", powerups + "");
-    }
-
 }

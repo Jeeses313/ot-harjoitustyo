@@ -1,4 +1,4 @@
-package pong.tools;
+package pong.dao;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

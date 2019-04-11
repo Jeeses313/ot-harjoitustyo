@@ -1,10 +1,11 @@
-package pong.screen;
+package pong.ui;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import pong.Pong;
 import pong.tools.ComponentCreator;
@@ -37,7 +38,7 @@ public class Options implements Screen {
         fastBatSpeedButton.getStyleClass().add("toggle-button");
         ToggleGroup batSpeedButtons = new ToggleGroup();
         batSpeedButtons.getToggles().addAll(slowBatSpeedButton, normalBatSpeedButton, fastBatSpeedButton);
-        int batSpeed = configs.getBatSpeed();
+        int batSpeed = configs.getInt("BatSpeed", 4);
         if (batSpeed < 4) {
             slowBatSpeedButton.fire();
         } else if (batSpeed == 4) {
@@ -45,14 +46,14 @@ public class Options implements Screen {
         } else {
             fastBatSpeedButton.fire();
         }
-        slowBatSpeedButton.setOnAction(e->{
-            configs.setBatSpeed(2);
+        slowBatSpeedButton.setOnAction(e -> {
+            configs.setInt("BatSpeed", 2);
         });
-        normalBatSpeedButton.setOnAction(e->{
-            configs.setBatSpeed(4);
+        normalBatSpeedButton.setOnAction(e -> {
+            configs.setInt("BatSpeed", 4);
         });
-        fastBatSpeedButton.setOnAction(e->{
-            configs.setBatSpeed(6);
+        fastBatSpeedButton.setOnAction(e -> {
+            configs.setInt("BatSpeed", 6);
         });
         components.getChildren().addAll(batSpeedLabel, slowBatSpeedButton, normalBatSpeedButton, fastBatSpeedButton);
 
@@ -68,7 +69,7 @@ public class Options implements Screen {
         fastSpeedButton.getStyleClass().add("toggle-button");
         ToggleGroup ballSpeedButtons = new ToggleGroup();
         ballSpeedButtons.getToggles().addAll(slowSpeedButton, normalSpeedButton, fastSpeedButton);
-        int ballSpeed = configs.getBallSpeed();
+        int ballSpeed = configs.getInt("BallSpeed", 8);
         if (ballSpeed < 8) {
             slowSpeedButton.fire();
         } else if (ballSpeed == 8) {
@@ -76,14 +77,14 @@ public class Options implements Screen {
         } else {
             fastSpeedButton.fire();
         }
-        slowSpeedButton.setOnAction(e->{
-            configs.setBallSpeed(6);
+        slowSpeedButton.setOnAction(e -> {
+            configs.setInt("BallSpeed", 6);
         });
-        normalSpeedButton.setOnAction(e->{
-            configs.setBallSpeed(8);
+        normalSpeedButton.setOnAction(e -> {
+            configs.setInt("BallSpeed", 8);
         });
-        fastSpeedButton.setOnAction(e->{
-            configs.setBallSpeed(10);
+        fastSpeedButton.setOnAction(e -> {
+            configs.setInt("BallSpeed", 10);
         });
         components.getChildren().addAll(ballSpeedLabel, slowSpeedButton, normalSpeedButton, fastSpeedButton);
 
@@ -99,7 +100,7 @@ public class Options implements Screen {
         bigSpeedUpButton.getStyleClass().add("toggle-button");
         ToggleGroup ballSpeedUpButtons = new ToggleGroup();
         ballSpeedUpButtons.getToggles().addAll(speedUpOffButton, normalSpeedUpButton, bigSpeedUpButton);
-        double ballSpeedUp = configs.getSpeedUp();
+        double ballSpeedUp = configs.getDouble("speedUp", 1);
         if (ballSpeedUp <= 1) {
             speedUpOffButton.fire();
         } else if (ballSpeedUp < 1.1) {
@@ -107,14 +108,14 @@ public class Options implements Screen {
         } else {
             bigSpeedUpButton.fire();
         }
-        speedUpOffButton.setOnAction(e->{
-            configs.setSpeedUp(0);
+        speedUpOffButton.setOnAction(e -> {
+            configs.setDouble("speedUp", 1);
         });
-        normalSpeedUpButton.setOnAction(e->{
-            configs.setSpeedUp(1.01);
+        normalSpeedUpButton.setOnAction(e -> {
+            configs.setDouble("speedUp", 1.01);
         });
-        bigSpeedUpButton.setOnAction(e->{
-            configs.setSpeedUp(1.1);
+        bigSpeedUpButton.setOnAction(e -> {
+            configs.setDouble("speedUp", 1.1);
         });
         components.getChildren().addAll(ballSpeedUpLabel, speedUpOffButton, normalSpeedUpButton, bigSpeedUpButton);
 
@@ -130,7 +131,7 @@ public class Options implements Screen {
         fivePointButton.getStyleClass().add("toggle-button");
         ToggleGroup endingpointButtons = new ToggleGroup();
         endingpointButtons.getToggles().addAll(onePointButton, threePointButton, fivePointButton);
-        int endingpoint = configs.getEndingPoint();
+        int endingpoint = configs.getInt("endingpoint", 5);
         if (endingpoint < 3) {
             onePointButton.fire();
         } else if (endingpoint == 3) {
@@ -138,14 +139,14 @@ public class Options implements Screen {
         } else {
             fivePointButton.fire();
         }
-        onePointButton.setOnAction(e->{
-            configs.setEndingPoint(1);
+        onePointButton.setOnAction(e -> {
+            configs.setInt("endingpoint", 1);
         });
-        threePointButton.setOnAction(e->{
-            configs.setEndingPoint(3);
+        threePointButton.setOnAction(e -> {
+            configs.setInt("endingpoint", 3);
         });
-        fivePointButton.setOnAction(e->{
-            configs.setEndingPoint(5);
+        fivePointButton.setOnAction(e -> {
+            configs.setInt("endingpoint", 5);
         });
         components.getChildren().addAll(endingpointLabel, onePointButton, threePointButton, fivePointButton);
 
@@ -158,17 +159,17 @@ public class Options implements Screen {
         powerupButtonOn.getStyleClass().add("toggle-button");
         ToggleGroup powerupButtons = new ToggleGroup();
         powerupButtons.getToggles().addAll(powerupButtonOff, powerupButtonOn);
-        int powerups = configs.getPowerups();
+        int powerups = configs.getInt("powerups", 0);
         if (powerups <= 0) {
             powerupButtonOff.fire();
         } else {
             powerupButtonOn.fire();
         }
-        powerupButtonOff.setOnAction(e->{
-            configs.setPowerups(0);
+        powerupButtonOff.setOnAction(e -> {
+            configs.setInt("powerups", 0);
         });
-        powerupButtonOn.setOnAction(e->{
-            configs.setPowerups(1);
+        powerupButtonOn.setOnAction(e -> {
+            configs.setInt("powerups", 1);
         });
         components.getChildren().addAll(powerupsLabel, powerupButtonOff, powerupButtonOn);
         powerupButtonOff.setDisable(true);
@@ -203,7 +204,7 @@ public class Options implements Screen {
         hardDifficultyButton.getStyleClass().add("toggle-button");
         ToggleGroup difficultyButtons = new ToggleGroup();
         difficultyButtons.getToggles().addAll(easyDifficultyButton, normalDifficultyButton, hardDifficultyButton);
-        int difficulty = configs.getDifficulty();
+        int difficulty = configs.getInt("difficulty", 1);
         if (difficulty <= 0) {
             easyDifficultyButton.fire();
         } else if (difficulty == 1) {
@@ -211,27 +212,36 @@ public class Options implements Screen {
         } else {
             hardDifficultyButton.fire();
         }
+        easyDifficultyButton.setOnAction(e -> {
+            configs.setInt("difficulty", 0);
+        });
+        normalDifficultyButton.setOnAction(e -> {
+            configs.setInt("difficulty", 1);
+        });
+        hardDifficultyButton.setOnAction(e -> {
+            configs.setInt("difficulty", 2);
+        });
         components.getChildren().addAll(difficultyLabel, easyDifficultyButton, normalDifficultyButton, hardDifficultyButton);
 
         Label pauseLabel = ComponentCreator.createLabel(10, 170, 20, "Pause button");
-        Button pauseButton = ComponentCreator.createButton(200, 170, 80, 5, configs.getPauseButton().toString());
+        Button pauseButton = ComponentCreator.createButton(200, 170, 90, 5, configs.getKey("pause", KeyCode.P).toString());
         pauseButton.setOnAction(e -> {
             pauseButton.setText("");
             this.options.setOnKeyPressed(key -> {
-                configs.setPauseButton(key.getCode());
+                configs.setKey("pause", key.getCode());
                 pauseButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
                 });
             });
         });
         components.getChildren().addAll(pauseLabel, pauseButton);
-        
+
         Label menuLabel = ComponentCreator.createLabel(10, 200, 20, "Menu button");
-        Button menuButton = ComponentCreator.createButton(200, 200, 80, 5, configs.getMenuButton().toString());
+        Button menuButton = ComponentCreator.createButton(200, 200, 90, 5, configs.getKey("menu", KeyCode.M).toString());
         menuButton.setOnAction(e -> {
             menuButton.setText("");
             this.options.setOnKeyPressed(key -> {
-                configs.setMenuButton(key.getCode());
+                configs.setKey("menu", key.getCode());
                 menuButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
                 });
@@ -240,11 +250,11 @@ public class Options implements Screen {
         components.getChildren().addAll(menuLabel, menuButton);
 
         Label player1upLabel = ComponentCreator.createLabel(10, 50, 20, "Player1 up button");
-        Button player1upButton = ComponentCreator.createButton(200, 50, 80, 5, configs.getPlayer1Up().toString());
+        Button player1upButton = ComponentCreator.createButton(200, 50, 90, 5, configs.getKey("Player1_Up", KeyCode.W).toString());
         player1upButton.setOnAction(e -> {
             player1upButton.setText("");
             this.options.setOnKeyPressed(key -> {
-                configs.setPlayer1Up(key.getCode());
+                configs.setKey("Player1_Up", key.getCode());
                 player1upButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
                 });
@@ -253,11 +263,11 @@ public class Options implements Screen {
         components.getChildren().addAll(player1upLabel, player1upButton);
 
         Label player1downLabel = ComponentCreator.createLabel(10, 80, 20, "Player1 down button");
-        Button player1downButton = ComponentCreator.createButton(200, 80, 80, 5, configs.getPlayer1Down().toString());
+        Button player1downButton = ComponentCreator.createButton(200, 80, 90, 5, configs.getKey("Player1_Down", KeyCode.S).toString());
         player1downButton.setOnAction(e -> {
             player1downButton.setText("");
             this.options.setOnKeyPressed(key -> {
-                configs.setPlayer1Down(key.getCode());
+                configs.setKey("Player1_Down", key.getCode());
                 player1downButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
                 });
@@ -266,11 +276,11 @@ public class Options implements Screen {
         components.getChildren().addAll(player1downLabel, player1downButton);
 
         Label player2upLabel = ComponentCreator.createLabel(10, 110, 20, "Player2 up button");
-        Button player2upButton = ComponentCreator.createButton(200, 110, 80, 5, configs.getPlayer2Up().toString());
+        Button player2upButton = ComponentCreator.createButton(200, 110, 90, 5, configs.getKey("Player2_Up", KeyCode.UP).toString());
         player2upButton.setOnAction(e -> {
             player2upButton.setText("");
             this.options.setOnKeyPressed(key -> {
-                configs.setPlayer2Up(key.getCode());
+                configs.setKey("Player2_Up", key.getCode());
                 player2upButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
                 });
@@ -279,11 +289,11 @@ public class Options implements Screen {
         components.getChildren().addAll(player2upLabel, player2upButton);
 
         Label player2downLabel = ComponentCreator.createLabel(10, 140, 20, "Player2 up button");
-        Button player2downButton = ComponentCreator.createButton(200, 140, 80, 5, configs.getPlayer2Down().toString());
+        Button player2downButton = ComponentCreator.createButton(200, 140, 90, 5, configs.getKey("Player2_Down", KeyCode.DOWN).toString());
         player2downButton.setOnAction(e -> {
             player2downButton.setText("");
             this.options.setOnKeyPressed(key -> {
-                configs.setPlayer2Down(key.getCode());
+                configs.setKey("Player2_Down", key.getCode());
                 player2downButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
                 });

@@ -1,7 +1,7 @@
 package pong;
 
-import pong.screen.Menu;
-import pong.screen.Screen;
+import pong.ui.Menu;
+import pong.ui.Screen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import pong.tools.Configurations;

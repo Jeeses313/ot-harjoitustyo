@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pong.actors.Ball;
 import pong.actors.Bat;
+import pong.actors.Wall;
 
 public class BallTest {
 
@@ -280,5 +281,13 @@ public class BallTest {
         testBall.setMovement(new Point2D(5, -10));
         testBall.collision(testbat);
         assertEquals(true, Math.abs(10 - testBall.getYMovement()) <= 0.000001);
+    }
+    
+    @Test
+    public void collisionWithWallCorrectXMovement() {
+        Wall testwall = new Wall(15, 20);
+        testBall.setMovement(new Point2D(5, 10));
+        testBall.collision(testwall);
+        assertEquals(true, Math.abs(-5 - testBall.getXMovement()) <= 0.000001);
     }
 }

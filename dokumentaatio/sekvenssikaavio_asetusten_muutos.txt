@@ -1,0 +1,7 @@
+User->Options: click hardDifficultyButton 
+Options->Configurations: setInt("difficulty", 2)
+Configurations->ConfigurationDao: setProperty("difficulty", "2")
+User->Options: click pauseButton
+User->Options: press 'O'
+Options->Configurations: setKey("pause", KeyCode.O)
+Configurations->ConfigurationDao: setProperty("pause", "O")

@@ -27,11 +27,11 @@ public class RallyGame {
         this.points = 0;
         this.gameEnd = false;
         this.pause = true;
-        this.pauseButton = config.getPauseButton();
-        this.menuButton = config.getMenuButton();
+        this.pauseButton = config.getKey("pause", KeyCode.P);
+        this.menuButton = config.getKey("menu", KeyCode.M);
         this.speedUp = 1.05;
         this.lastPause = System.currentTimeMillis();
-        player = new Human(config.getPlayer1Up(), config.getPlayer1Down(), 10, 160, 4);
+        player = new Human(config.getKey("Player1_Up", KeyCode.W), config.getKey("Player1_Down", KeyCode.S), 10, 160, config.getInt("BatSpeed", 4));
         wall = new Wall(790, 0);
         ball = new Ball(10, 400, 200, 6);
         ball.randomMovement();

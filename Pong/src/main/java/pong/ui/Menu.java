@@ -1,5 +1,5 @@
 
-package pong.screen;
+package pong.ui;
 
 import pong.games.NormalGame;
 import javafx.scene.Scene;
