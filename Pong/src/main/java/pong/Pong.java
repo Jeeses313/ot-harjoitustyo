@@ -4,7 +4,7 @@ import pong.ui.Menu;
 import pong.ui.Screen;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pong.dao.HighScoresDao;
+import pong.dao.HighscoresDao;
 import pong.tools.Configurations;
 
 public class Pong extends Application {
@@ -12,11 +12,11 @@ public class Pong extends Application {
     public static Stage stage;
     public static Screen screen;
     public static Configurations config;
-    public static HighScoresDao scoreDao;
+    public static HighscoresDao scoreDao;
 
     public static void main(String[] args) {
         config = new Configurations("config.properties");
-        scoreDao = new HighScoresDao("jdbc:h2:./highscores");
+        scoreDao = new HighscoresDao("jdbc:h2:./highscores");
         launch(Pong.class);
     }
 
@@ -44,7 +44,7 @@ public class Pong extends Application {
         return config;
     }
 
-    public static HighScoresDao getScoreDao() {
+    public static HighscoresDao getScoreDao() {
         return scoreDao;
     }
 

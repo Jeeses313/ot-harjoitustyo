@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.util.Pair;
 
-public class HighScoresDao {
+public class HighscoresDao {
     private String path;
 
-    public HighScoresDao(String path) {
+    public HighscoresDao(String path) {
         this.path = path;
     }
     
@@ -49,7 +49,7 @@ public class HighScoresDao {
             conn.prepareStatement("DROP TABLE Scores IF EXISTS;").executeUpdate();
             conn.prepareStatement("CREATE TABLE Scores(id serial, name varchar(10), score integer);").executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(HighScoresDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HighscoresDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         insertScore("Pro", 100);
         insertScore("Good", 50);

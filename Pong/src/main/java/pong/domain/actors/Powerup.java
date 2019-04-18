@@ -12,8 +12,8 @@ public class Powerup implements Collisionable {
     private int y;
     private boolean shown;
     private int type;
-    private long activationTime;
-    private long spawnTime;
+    public long activationTime;
+    public long spawnTime;
     private Collisionable target;
 
     public Powerup(int x, int y, int type) {
@@ -40,6 +40,7 @@ public class Powerup implements Collisionable {
             speedChange();
         } else {
             this.target = ball;
+            speedChange();
         }
     }
 

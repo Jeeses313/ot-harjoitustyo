@@ -9,13 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 import pong.Pong;
-import pong.dao.HighScoresDao;
+import pong.dao.HighscoresDao;
 import pong.tools.ComponentCreator;
 
 public class HighscoreScreen implements Screen {
 
     private Scene scene;
-    private HighScoresDao scoreDao;
+    private HighscoresDao scoreDao;
     private int currentScore;
     private ArrayList<Pair<String, Integer>> scores;
 

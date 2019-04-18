@@ -105,5 +105,11 @@ public class BatTest {
         testBat.moveTo(0);
         assertEquals(true, Math.abs(0 - testBat.getyPosition()) <= 0.000001);
     }
+    
+    @Test
+    public void setSizeSetsSize() {
+        testBat.setSize(0.5);
+        assertEquals(true, Math.abs(0.5 - testBat.getSize()) <= 0.000001);
+    }
 }
 

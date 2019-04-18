@@ -13,5 +13,5 @@
 |10.4 | 4|  asetus näkymä, asetuksiin liityvien virheiden käsittely ja rally-peli|
 |11.4 | 3| toistuvan koodin vähennys aseutksien käsittelyssä, seinään ja asetuksiin liittyvät testit |
 |17.4 | 4|  pisteiden tallennus ja värien muuttaminen |
-|18.4 | 2| lisävoimat |
-|yht. | 33 |  |
+|18.4 | 4| lisävoimat, lisävoimien ja pistedaon testit |
+|yht. | 35 |  |
