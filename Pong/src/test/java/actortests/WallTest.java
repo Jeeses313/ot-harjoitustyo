@@ -5,8 +5,8 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pong.actors.Bat;
-import pong.actors.Wall;
+import pong.domain.actors.Bat;
+import pong.domain.actors.Wall;
 
 
 public class WallTest {

@@ -1,12 +1,13 @@
 package playertests;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pong.actors.Ball;
-import pong.actors.Bat;
-import pong.player.Human;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Bat;
+import pong.domain.player.Human;
 
 public class HumanTest {
 
@@ -14,7 +15,7 @@ public class HumanTest {
 
     @Before
     public void setUp() {
-        player = new Human(KeyCode.UP, KeyCode.DOWN, 1, 2, 3);
+        player = new Human(KeyCode.UP, KeyCode.DOWN, 1, 2, 3, Color.BLACK);
     }
 
     @Test
@@ -35,14 +36,14 @@ public class HumanTest {
 
     @Test
     public void moveBatReturnsDirection() {
-        Ball testBall = new Ball(5, 1, 2, 3);
+        Ball testBall = new Ball(5, 1, 2, 3, Color.BLACK);
         int direction = player.moveBat(1, 0, 1, testBall);
         assertEquals(1, direction);
     }
 
     @Test
     public void moveBatMovesBat() {
-        Ball testBall = new Ball(5, 1, 2, 3);
+        Ball testBall = new Ball(5, 1, 2, 3, Color.BLACK);
         player.moveBat(1, 0, 200, testBall);
         assertEquals(true, Math.abs(player.getBat().getyPosition() - 5) <= 0.000001);
     }

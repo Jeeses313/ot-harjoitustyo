@@ -1,12 +1,13 @@
-package pong.games;
+package pong.domain.games;
 
 import java.util.HashMap;
+import java.util.Random;
 import javafx.scene.input.KeyCode;
-import pong.Pong;
-import pong.actors.Ball;
-import pong.player.Ai;
-import pong.player.Human;
-import pong.player.Player;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Powerup;
+import pong.domain.player.Ai;
+import pong.domain.player.Human;
+import pong.domain.player.Player;
 import pong.tools.Configurations;
 
 public class NormalGame {
@@ -23,27 +24,29 @@ public class NormalGame {
     private KeyCode menuButton;
     private long lastPause;
     private double speedUp;
+    private int powerups;
+    private Powerup powerup;
 
-    public NormalGame(boolean twoPlayers) {
-        Configurations config = Pong.getConfig();
+    public NormalGame(boolean twoPlayers, Configurations config) {
         this.twoPlayers = twoPlayers;
         this.endingPoint = config.getInt("endingpoint", 5);
         this.leftPoints = 0;
         this.rightPoints = 0;
         this.twoPlayers = twoPlayers;
-
+        this.powerups = config.getInt("powerups", 0);
+        this.powerup = null;
         this.pause = true;
         this.pauseButton = config.getKey("pause", KeyCode.P);
         this.menuButton = config.getKey("menu", KeyCode.M);
         this.speedUp = config.getDouble("speedUp", 1);
         this.lastPause = System.currentTimeMillis();
-        player1 = new Human(config.getKey("Player1_Up", KeyCode.W), config.getKey("Player1_Down", KeyCode.S), 10, 160, config.getInt("BatSpeed", 4));
+        player1 = new Human(config.getKey("Player1_Up", KeyCode.W), config.getKey("Player1_Down", KeyCode.S), 10, 160, config.getInt("BatSpeed", 4), config.getColor("Player1_colour"));
         if (twoPlayers) {
-            player2 = new Human(config.getKey("Player2_Up", KeyCode.UP), config.getKey("Player2_Down", KeyCode.DOWN), 770, 160, config.getInt("BatSpeed", 4));
+            player2 = new Human(config.getKey("Player2_Up", KeyCode.UP), config.getKey("Player2_Down", KeyCode.DOWN), 770, 160, config.getInt("BatSpeed", 4), config.getColor("Player2_colour"));
         } else {
-            player2 = new Ai(770, 160, config.getInt("difficulty", 1));
+            player2 = new Ai(770, 160, config.getInt("difficulty", 1), config.getColor("Player2_colour"));
         }
-        ball = new Ball(10, 400, 200, config.getInt("BallSpeed", 8));
+        ball = new Ball(10, 400, 200, config.getInt("BallSpeed", 8), config.getColor("Ball_colour"));
         ball.randomMovement();
     }
 
@@ -108,6 +111,12 @@ public class NormalGame {
         } else if (ball.collision(player2.getBat())) {
             ball.speedUp(speedUp);
         }
+        if (powerup != null) {
+            if (powerup.collision(ball)) {
+                powerup.activate(player1, player2, ball);
+            }
+        }
+
     }
 
     public int goalCheck() {
@@ -132,11 +141,9 @@ public class NormalGame {
         if (rightPoints == endingPoint) {
             if (twoPlayers) {
                 return 0;
-
             } else {
                 return 1;
             }
-
         } else if (leftPoints == endingPoint) {
             return 2;
         } else {
@@ -149,6 +156,28 @@ public class NormalGame {
         ball.randomMovement();
         player1.moveBatTo(160);
         player2.moveBatTo(160);
+        if (this.powerup != null) {
+            this.powerup.deactivate(player1, player2, ball);
+            this.powerup = null;
+        }
+    }
+
+    public void powerupManagement() {
+        if (this.powerups < 1 || pause) {
+            return;
+        }
+        if (powerup == null) {
+            if (new Random(System.currentTimeMillis()).nextInt(10000) < 100) {
+                spawnPowerup();
+            }
+        } else {
+            powerup = powerup.despawn(player1, player2, ball);
+        }
+    }
+
+    public void spawnPowerup() {
+        Random rng = new Random(System.currentTimeMillis());
+        powerup = new Powerup(rng.nextInt(720) + 40, rng.nextInt(340) + 20, rng.nextInt(6));
     }
 
     public void moveBall() {
@@ -183,6 +212,10 @@ public class NormalGame {
 
     public Ball getBall() {
         return ball;
+    }
+
+    public Powerup getPowerup() {
+        return powerup;
     }
 
 }

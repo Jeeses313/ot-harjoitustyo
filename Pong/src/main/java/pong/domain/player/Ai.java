@@ -1,15 +1,16 @@
-package pong.player;
+package pong.domain.player;
 
 import javafx.scene.input.KeyCode;
-import pong.actors.Ball;
-import pong.actors.Bat;
+import javafx.scene.paint.Color;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Bat;
 
 public class Ai extends Player {
 
     private int difficulty;
 
-    public Ai(int x, int y, int difficulty) {
-        super(x, y, 0);
+    public Ai(int x, int y, int difficulty, Color color) {
+        super(x, y, 0, color);
         if (difficulty <= 0) {
             super.getBat().setMovementSpeed(5);
         } else if (difficulty == 1) {

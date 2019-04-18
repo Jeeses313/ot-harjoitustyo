@@ -1,6 +1,6 @@
 package pong.ui;
 
-import pong.games.NormalGame;
+import pong.domain.games.NormalGame;
 import java.util.HashMap;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import pong.Pong;
-import pong.games.RallyGame;
+import pong.domain.games.RallyGame;
 import pong.tools.ComponentCreator;
 
 public class RallyGameScreen implements Screen {
@@ -56,18 +56,23 @@ public class RallyGameScreen implements Screen {
                     pauseText.setText("Paused. Press " + game.getPauseButton().toString() + " to unpause \nor " + game.getMenuButton().toString() + " to return to menu");
                     pauseText.setVisible(false);
                 } else if (pauseManagement == 1) {
+                    HighscoreScreen scoreScreen = new HighscoreScreen(game.getPoints());
+                    Pong.setScreen(scoreScreen);
+                    scoreScreen.start();
+                    stop();
+                } else if (pauseManagement == 2) {
+                    pauseText.setVisible(true);
+                } else if (pauseManagement == 4) {
                     Menu menu = new Menu();
                     Pong.setScreen(menu);
                     menu.start();
                     stop();
-                } else if (pauseManagement == 2) {
-                    pauseText.setVisible(true);
                 }
                 game.collisionManagement();
                 int goalCheck = game.goalCheck();
                 if (goalCheck < 5) {
                     pauseText.setVisible(true);
-                    pauseText.setText("You lost. Press " + game.getPauseButton().toString() + " to return to menu");
+                    pauseText.setText("You lost. Press " + game.getPauseButton().toString() + " to go to highscore \nscreen or " + game.getMenuButton().toString() + " to return to menu");
                     pauseText.setFont(new Font(30));
                     pauseText.setTranslateX(120);
                 }

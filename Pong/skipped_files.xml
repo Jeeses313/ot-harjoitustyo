@@ -10,4 +10,5 @@
     <suppress files="pong.ui.RallyGameScreen.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="pong.ui.Options.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="pong.ui.Screen.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="pong.ui.HighscoreScreen.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

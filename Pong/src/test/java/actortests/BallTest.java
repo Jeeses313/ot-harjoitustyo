@@ -1,14 +1,15 @@
 package actortests;
 
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import pong.actors.Ball;
-import pong.actors.Bat;
-import pong.actors.Wall;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Bat;
+import pong.domain.actors.Wall;
 
 public class BallTest {
 
@@ -16,7 +17,7 @@ public class BallTest {
 
     @Before
     public void setUp() {
-        testBall = new Ball(10, 15, 20, 5);
+        testBall = new Ball(10, 15, 20, 5, Color.BLACK);
     }
 
     @Test
@@ -234,7 +235,7 @@ public class BallTest {
 
     @Test
     public void noCollisionCorrectXMovement() {
-        Bat testbat = new Bat(100, 100, 0);
+        Bat testbat = new Bat(100, 100, 0, Color.BLACK);
         testBall.setMovement(new Point2D(5, 10));
         testBall.collision(testbat);
         assertEquals(true, Math.abs(5 - testBall.getXMovement()) <= 0.000001);
@@ -242,7 +243,7 @@ public class BallTest {
 
     @Test
     public void noCollisionCorrectYMovement() {
-        Bat testbat = new Bat(100, 100, 0);
+        Bat testbat = new Bat(100, 100, 0, Color.BLACK);
         testBall.setMovement(new Point2D(5, 10));
         testBall.collision(testbat);
         assertEquals(true, Math.abs(10 - testBall.getYMovement()) <= 0.000001);
@@ -250,7 +251,7 @@ public class BallTest {
     
     @Test
     public void collisionCorrectXMovement() {
-        Bat testbat = new Bat(15, 20, 0);
+        Bat testbat = new Bat(15, 20, 0, Color.BLACK);
         testBall.setMovement(new Point2D(5, 10));
         testBall.collision(testbat);
         assertEquals(true, Math.abs(-5 - testBall.getXMovement()) <= 0.000001);
@@ -258,7 +259,7 @@ public class BallTest {
     
     @Test
     public void collisionCorrectYMovementWhenBatMovesSameWay() {
-        Bat testbat = new Bat(15, 20, 1);
+        Bat testbat = new Bat(15, 20, 1, Color.BLACK);
         testbat.move(1, -10, 100);
         testBall.setMovement(new Point2D(5, 10));
         testBall.collision(testbat);
@@ -267,7 +268,7 @@ public class BallTest {
     
     @Test
     public void collisionCorrectYMovementWhenBatMovesOppositeWay1() {
-        Bat testbat = new Bat(15, 20, 1);
+        Bat testbat = new Bat(15, 20, 1, Color.BLACK);
         testbat.move(-1, -10, 100);
         testBall.setMovement(new Point2D(5, 10));
         testBall.collision(testbat);
@@ -276,7 +277,7 @@ public class BallTest {
     
     @Test
     public void collisionCorrectYMovementWhenBatMovesOppositeWay2() {
-        Bat testbat = new Bat(15, 20, 1);
+        Bat testbat = new Bat(15, 20, 1, Color.BLACK);
         testbat.move(1, -10, 100);
         testBall.setMovement(new Point2D(5, -10));
         testBall.collision(testbat);

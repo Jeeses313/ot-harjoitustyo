@@ -2,15 +2,16 @@ package playertests;
 
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pong.actors.Ball;
-import pong.actors.Bat;
-import pong.player.Ai;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Bat;
+import pong.domain.player.Ai;
 
 public class AiTest {
 
@@ -20,9 +21,9 @@ public class AiTest {
 
     @Before
     public void setUp() {
-        easy = new Ai(1, 2, 0);
-        normal = new Ai(1, 2, 1);
-        hard = new Ai(1, 2, 2);
+        easy = new Ai(1, 2, 0, Color.BLACK);
+        normal = new Ai(1, 2, 1, Color.BLACK);
+        hard = new Ai(1, 2, 2, Color.BLACK);
     }
 
     @Test
@@ -61,21 +62,21 @@ public class AiTest {
 
     @Test
     public void moveBatEasyCorrectDirectionWhenBallLowerThanBat() {
-        Ball testBall = new Ball(1, 0, 10, 0);
+        Ball testBall = new Ball(1, 0, 10, 0, Color.BLACK);
         int direction = easy.moveBat(0, 0, 10, testBall);
         assertEquals(1, direction);
     }
 
     @Test
     public void moveBatEasyCorrectDirectionWhenBallHigherThanBat() {
-        Ball testBall = new Ball(1, 0, -10, 0);
+        Ball testBall = new Ball(1, 0, -10, 0, Color.BLACK);
         int direction = easy.moveBat(0, 0, 10, testBall);
         assertEquals(-1, direction);
     }
 
     @Test
     public void moveBatNormalCorrectDirectionWhenBallMovesDown() {
-        Ball testBall = new Ball(1, 0, 10, 0);
+        Ball testBall = new Ball(1, 0, 10, 0, Color.BLACK);
         testBall.setMovement(new Point2D(0, 10));
         int direction = normal.moveBat(0, 0, 10, testBall);
         assertEquals(1, direction);
@@ -83,7 +84,7 @@ public class AiTest {
 
     @Test
     public void moveBatNormalCorrectDirectionWhenBallMovesUp() {
-        Ball testBall = new Ball(1, 0, -10, 0);
+        Ball testBall = new Ball(1, 0, -10, 0, Color.BLACK);
         testBall.setMovement(new Point2D(0, -10));
         int direction = normal.moveBat(0, 0, 10, testBall);
         assertEquals(-1, direction);
@@ -91,7 +92,7 @@ public class AiTest {
 
     @Test
     public void moveBatHardCorrectDirectionWhenBallMovesDown() {
-        Ball testBall = new Ball(1, 0, 10, 0);
+        Ball testBall = new Ball(1, 0, 10, 0, Color.BLACK);
         testBall.setMovement(new Point2D(0, 10));
         int direction = hard.moveBat(0, 0, 10, testBall);
         assertEquals(1, direction);
@@ -99,7 +100,7 @@ public class AiTest {
 
     @Test
     public void moveBatHardCorrectDirectionWhenBallMovesUp() {
-        Ball testBall = new Ball(1, 0, -10, 0);
+        Ball testBall = new Ball(1, 0, -10, 0, Color.BLACK);
         testBall.setMovement(new Point2D(0, -10));
         int direction = hard.moveBat(0, 0, 10, testBall);
         assertEquals(-1, direction);

@@ -1,5 +1,5 @@
 
-package pong.actors;
+package pong.domain.actors;
 
 import javafx.scene.shape.Shape;
 

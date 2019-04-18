@@ -1,5 +1,6 @@
-package pong.actors;
+package pong.domain.actors;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import pong.tools.ComponentCreator;
 
@@ -9,8 +10,11 @@ public class Bat implements Collisionable {
     private int movementSpeed;
     private double yPosition;
     private double xPosition;
-
-    public Bat(int x, int y, int movementSpeed) {
+    private Color colour;
+    private double size;
+    
+    
+    public Bat(int x, int y, int movementSpeed, Color colour) {
         this.lastMovement = 0;
         this.movementSpeed = movementSpeed;
         if (movementSpeed <= 0) {
@@ -18,6 +22,8 @@ public class Bat implements Collisionable {
         }
         this.xPosition = x;
         this.yPosition = y;
+        this.colour = colour;
+        this.size = 1;
     }
 
     public void move(int direction, int miny, int maxy) {
@@ -60,7 +66,7 @@ public class Bat implements Collisionable {
 
     @Override
     public Shape getSprite() {
-        return ComponentCreator.createRectangle(10, 60, this.xPosition, this.yPosition);
+        return ComponentCreator.createRectangle(10, 60, this.xPosition, this.yPosition, this.colour);
     }
 
     @Override
@@ -71,5 +77,15 @@ public class Bat implements Collisionable {
     public void moveTo(int y) {
         this.yPosition = y;
     }
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
+    
+    
 
 }

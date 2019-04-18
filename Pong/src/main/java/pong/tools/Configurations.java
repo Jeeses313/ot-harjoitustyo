@@ -3,6 +3,7 @@ package pong.tools;
 import pong.dao.ConfigurationDao;
 import java.util.HashMap;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class Configurations {
 
@@ -43,10 +44,19 @@ public class Configurations {
         try {
             return Double.parseDouble(this.configs.get(doubleName));
         } catch (Exception e) {
-            this.setDouble(doubleName, 1);
+            this.setDouble(doubleName, defaultDouble);
             return Double.parseDouble(this.configs.get(doubleName));
         }
 
+    }
+    
+    public Color getColor(String colorName) {
+        try {
+            return Color.valueOf(configs.get(colorName));
+        } catch (Exception e) {
+            this.setColor(colorName, Color.BLACK);
+            return Color.valueOf(this.configs.get(colorName));
+        }
     }
 
     public void setKey(String keyName, KeyCode key) {
@@ -62,5 +72,10 @@ public class Configurations {
     public void setDouble(String doubleName, double doubleValue) {
         this.configs.put(doubleName, doubleValue + "");
         configurationDao.setProperty(doubleName, doubleValue + "");
+    }
+    
+    public void setColor(String colorName, Color colorValue) {
+        this.configs.put(colorName, colorValue + "");
+        configurationDao.setProperty(colorName, colorValue + "");
     }
 }

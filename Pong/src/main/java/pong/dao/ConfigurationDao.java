@@ -45,21 +45,28 @@ public class ConfigurationDao {
     public static void initProperties() {
         try {
             OutputStream output = new FileOutputStream(fileName);
-            properties.setProperty("difficulty", "1");
-            properties.setProperty("pause", "P");
-            properties.setProperty("menu", "M");
-            properties.setProperty("Player1_Up", "W");
-            properties.setProperty("Player1_Down", "S");
-            properties.setProperty("Player2_Up", "Up");
-            properties.setProperty("Player2_Down", "Down");
-            properties.setProperty("endingpoint", "5");
-            properties.setProperty("speedUp", "1");
-            properties.setProperty("BallSpeed", "8");
-            properties.setProperty("BatSpeed", "4");
-            properties.setProperty("powerups", "0");
+            initData();
             properties.store(output, null);
         } catch (Exception f) {
         }
+    }
+
+    public static void initData() {
+        properties.setProperty("difficulty", "1");
+        properties.setProperty("pause", "P");
+        properties.setProperty("menu", "M");
+        properties.setProperty("Player1_Up", "W");
+        properties.setProperty("Player1_Down", "S");
+        properties.setProperty("Player2_Up", "Up");
+        properties.setProperty("Player2_Down", "Down");
+        properties.setProperty("endingpoint", "5");
+        properties.setProperty("speedUp", "1");
+        properties.setProperty("BallSpeed", "8");
+        properties.setProperty("BatSpeed", "4");
+        properties.setProperty("Player1_colour", "0x000000ff");
+        properties.setProperty("Player2_colour", "0x000000ff");
+        properties.setProperty("Ball_colour", "0x000000ff");
+        properties.setProperty("powerups", "0");
     }
 
     public static HashMap<String, String> resetConfigurations() {

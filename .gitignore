@@ -4,3 +4,7 @@
 /Pong/nbproject/
 /Pong/config.properties
 /Pong/test.properties
+/Pong/highscores.mv.db
+/Pong/highscores.trace.db
+/Pong/test.mv.db
+/Pong/test.trace.db

@@ -1,5 +1,6 @@
-package pong.actors;
+package pong.domain.actors;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import pong.tools.ComponentCreator;
 
@@ -20,7 +21,7 @@ public class Wall implements Collisionable {
 
     @Override
     public Shape getSprite() {
-        return ComponentCreator.createRectangle(20, 420, this.xPosition, this.yPosition);
+        return ComponentCreator.createRectangle(20, 420, this.xPosition, this.yPosition, Color.BLACK);
     }
 
     public int getxPosition() {

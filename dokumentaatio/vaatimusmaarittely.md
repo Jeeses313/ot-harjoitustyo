@@ -22,4 +22,4 @@ Sovelluksella on vain yhdenlaisia käyttäjiä, eli normaaleja käyttäjiä tai 
 
 - Yksinpelimuoto, jossa lyödään palloa seinää vasten, pallon nopeus kiihtyy ja pisteitä kertyy lyönneistä.
 
-- Mahdollisuus laittaa asetuksista käyttöön lisävoimat, jotka ilmestyvät pelikentälle ja jotka vaikuttavat viimeksi lyöneeseen pelaajaan jonkin aikaa. Esim. maila pienee/kasvaa/hidastuu/nopeentuu.
+- Mahdollisuus laittaa asetuksista käyttöön lisävoimat, jotka ilmestyvät pelikentälle ja jotka vaikuttavat viimeksi lyöneeseen pelaajaan jonkin aikaa. Esim. maila pienenee/kasvaa/hidastuu/nopeentuu.

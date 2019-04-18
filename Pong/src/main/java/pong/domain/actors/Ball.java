@@ -1,7 +1,8 @@
-package pong.actors;
+package pong.domain.actors;
 
 import java.util.Random;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import pong.tools.ComponentCreator;
@@ -14,8 +15,9 @@ public class Ball implements Collisionable {
     private double yPosition;
     private int radius;
     private int speed;
+    private Color colour;
 
-    public Ball(int radius, int x, int y, int speed) {
+    public Ball(int radius, int x, int y, int speed, Color colour) {
         this.speed = speed;
         if (speed <= 0) {
             this.speed = 8;
@@ -24,15 +26,16 @@ public class Ball implements Collisionable {
         this.yMovement = 0;
         this.xMovement = 0;
         this.moveTo(x, y);
+        this.colour = colour;
     }
 
     @Override
     public Shape getSprite() {
-        return ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
+        return ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition(), colour);
     }
 
     public Circle getSpriteCircle() {
-        return ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition());
+        return ComponentCreator.createCircle(radius, this.xPosition, this.getyPosition(), colour);
     }
 
     public Point2D getPosition() {

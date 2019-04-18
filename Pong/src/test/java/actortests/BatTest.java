@@ -1,17 +1,18 @@
 package actortests;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import pong.actors.Bat;
+import pong.domain.actors.Bat;
 
 public class BatTest {
     Bat testBat;
 
     @Before
     public void setUp() {
-        testBat = new Bat(15, 20, 5);
+        testBat = new Bat(15, 20, 5, Color.BLACK);
     }
     
     @Test

@@ -1,16 +1,17 @@
-package pong.player;
+package pong.domain.player;
 
 import javafx.scene.input.KeyCode;
-import pong.actors.Ball;
-import pong.actors.Bat;
+import javafx.scene.paint.Color;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Bat;
 
 public class Human extends Player {
 
     private KeyCode up;
     private KeyCode down;
 
-    public Human(KeyCode up, KeyCode down, int x, int y, int movementSpeed) {
-        super(x, y, movementSpeed);
+    public Human(KeyCode up, KeyCode down, int x, int y, int movementSpeed, Color color) {
+        super(x, y, movementSpeed, color);
         this.up = up;
         this.down = down;
 

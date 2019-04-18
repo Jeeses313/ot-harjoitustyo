@@ -2,11 +2,13 @@ package pong.ui;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import pong.Pong;
 import pong.tools.ComponentCreator;
 import pong.tools.Configurations;
@@ -23,8 +25,9 @@ public class Options implements Screen {
 
         Label gameSettingsLabel = ComponentCreator.createLabel(470, 0, 30, "Game settings");
         Label controlSettingsLabel = ComponentCreator.createLabel(70, 0, 30, "Control settings");
+        Label colourSettingsLabel = ComponentCreator.createLabel(70, 230, 30, "Colour settings");
         Label warningLabel = ComponentCreator.createLabel(420, 240, 15, "Warning! Ai is balanced for normal speeds and \nmight not work as intented on lower or higher speeds.\nIf you want to configure specific values, edit \nconfig.properties file.");
-        components.getChildren().addAll(gameSettingsLabel, controlSettingsLabel, warningLabel);
+        components.getChildren().addAll(gameSettingsLabel, controlSettingsLabel, warningLabel, colourSettingsLabel);
 
         Label batSpeedLabel = ComponentCreator.createLabel(400, 50, 20, "Bat speed");
         RadioButton slowBatSpeedButton = ComponentCreator.createRadioButton(530, 50, 60, 5, "Slow");
@@ -172,8 +175,6 @@ public class Options implements Screen {
             configs.setInt("powerups", 1);
         });
         components.getChildren().addAll(powerupsLabel, powerupButtonOff, powerupButtonOn);
-        powerupButtonOff.setDisable(true);
-        powerupButtonOn.setDisable(true);
 
         Button resetButton = ComponentCreator.createButton(580, 330, 140, 40, "Reset to default");
         resetButton.setOnAction(e -> {
@@ -299,9 +300,30 @@ public class Options implements Screen {
                 });
             });
         });
-
+        
         components.getChildren().addAll(player2downLabel, player2downButton);
-
+        
+        Label player1ColourLabel = ComponentCreator.createLabel(10, 270, 20, "Player1");
+        ColorPicker  player1ColorPicker = ComponentCreator.createColourPicker(120, 275, 30, 30, configs.getColor("Player1_colour"));
+        player1ColorPicker.setOnAction(e -> {
+            configs.setColor("Player1_colour", player1ColorPicker.getValue());
+        });
+        components.getChildren().addAll(player1ColourLabel,player1ColorPicker);
+        
+        Label player2ColourLabel = ComponentCreator.createLabel(10, 300, 20, "Player2/Ai");
+        ColorPicker  player2ColorPicker = ComponentCreator.createColourPicker(120, 305, 30, 30, configs.getColor("Player2_colour"));
+        player2ColorPicker.setOnAction(e -> {
+            configs.setColor("Player2_colour", player2ColorPicker.getValue());
+        });
+        components.getChildren().addAll(player2ColourLabel,player2ColorPicker);
+        
+        Label ballColourLabel = ComponentCreator.createLabel(10, 330, 20, "Ball");
+        ColorPicker  ballColorPicker = ComponentCreator.createColourPicker(120, 335, 30, 30, configs.getColor("Ball_colour"));
+        ballColorPicker.setOnAction(e -> {
+            configs.setColor("Ball_colour", ballColorPicker.getValue());
+        });
+        components.getChildren().addAll(ballColourLabel,ballColorPicker);
+        
     }
 
     @Override

@@ -1,12 +1,12 @@
-package pong.games;
+package pong.domain.games;
 
 import java.util.HashMap;
 import javafx.scene.input.KeyCode;
 import pong.Pong;
-import pong.actors.Ball;
-import pong.actors.Wall;
-import pong.player.Human;
-import pong.player.Player;
+import pong.domain.actors.Ball;
+import pong.domain.actors.Wall;
+import pong.domain.player.Human;
+import pong.domain.player.Player;
 import pong.tools.Configurations;
 
 public class RallyGame {
@@ -22,8 +22,7 @@ public class RallyGame {
     private double speedUp;
     private boolean gameEnd;
 
-    public RallyGame() {
-        Configurations config = Pong.getConfig();
+    public RallyGame(Configurations config) {
         this.points = 0;
         this.gameEnd = false;
         this.pause = true;
@@ -31,9 +30,9 @@ public class RallyGame {
         this.menuButton = config.getKey("menu", KeyCode.M);
         this.speedUp = 1.05;
         this.lastPause = System.currentTimeMillis();
-        player = new Human(config.getKey("Player1_Up", KeyCode.W), config.getKey("Player1_Down", KeyCode.S), 10, 160, config.getInt("BatSpeed", 4));
+        player = new Human(config.getKey("Player1_Up", KeyCode.W), config.getKey("Player1_Down", KeyCode.S), 10, 160, config.getInt("BatSpeed", 4), config.getColor("Player1_colour"));
         wall = new Wall(790, 0);
-        ball = new Ball(10, 400, 200, 6);
+        ball = new Ball(10, 400, 200, 6, config.getColor("Ball_colour"));
         ball.randomMovement();
     }
 
@@ -65,7 +64,7 @@ public class RallyGame {
             }
         }
         if (pause && pressedButtons.getOrDefault(menuButton, false)) {
-            return 1;
+            return 4;
         }
         return 3;
 
