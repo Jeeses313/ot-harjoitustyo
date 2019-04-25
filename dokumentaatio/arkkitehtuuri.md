@@ -59,14 +59,14 @@ Jokaisella _NormalGameScreen_ ja _RallyGameScreen_:ien AnimationTimer-olion suor
 1. Jos peli ei ole paussilla liikutetaan pelaajien mailoja käyttöliittymän puolen kuuntelijalta saatujen näppäinten painallusten mukaan. Ai liikuttaa mailaa pallon sijainnin mukaan.  
 2. Tarkistetaan onko pause- tai menu-näppäimiä painettu ja onko peli tällä hetkellä paussilla sovelluslogiikan puolella ja toimitaan palautetun arvon mukaisesti käyttöliittymän puolella. 
 Mahdollisia toimintoja on neljä:  
-  1. Ei tehdä mitään.  
-  2. Laitetaan paussiteksti näkyville.  
-  3. Poistetaan paussiteksti näkyvistä.  
-  4. Siirrytään menuun.  
+    1. Ei tehdä mitään.  
+    2. Laitetaan paussiteksti näkyville.  
+    3. Poistetaan paussiteksti näkyvistä.  
+    4. Siirrytään menuun.  
 3. Tarkistetaan taphtuuko törmäyksiä, jossa samalla oli suorittavat törmäyksessä tapahtuvat toiminnot, kuten pallon liikkeen kääntyminen, pallon nopeentuminen ja lisävoiman aktivoituminen.  
 4. Tarkistetaan onko pallo maalissa sovelluslogiikan puolella ja toimitaan palautetun arvon mukaan käyttöliittymän puolella. Mahdollisia tapahtumia on kaksi:  
-  1. Näytetään teksti, joka kertoo toisen voittaneen. Ai:n voittaessa ja pallottelussa, että pelaaja hävisi.
-  2. Näytetään pelin alussa oleva teksti pelin aloittamiselle.  
+    1. Näytetään teksti, joka kertoo toisen voittaneen. Ai:n voittaessa ja pallottelussa, että pelaaja hävisi.
+    2. Näytetään pelin alussa oleva teksti pelin aloittamiselle.  
 5. Hallitaan lisävoimien toimintoja, jos lisävoimat ovat päällä, eli uuden lisävoiman tekeminen, lisävoiman vaikutuksen loppuminen ja lisävoiman katoaminen.  
 6. Jos peli ei ole paussilla, pallon liikuttaminen.
 7. Muutosten piirtäminen ruudulle.
