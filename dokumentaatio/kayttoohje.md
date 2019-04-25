@@ -37,12 +37,12 @@
 
 * Pallo lähtee liikkumaan pelin alussa satunnaiseen suuntaan.
 
-* Pallon osuessa mailaan tai seinään (_Rally game_) sen vaakasuuntainen liike kääntyy vastakkaiseksi.
+* Pallon osuessa mailaan tai seinään (pallottelu) sen vaakasuuntainen liike kääntyy vastakkaiseksi.
 
 * Jos pelaaja liikuttaa mailaa pallon pystysuuntaista liikettä vastakkaiseen suuntaan osuessaan siihen, 
 pallon pystysuuntainen liike kääntyy myös. 
 
-* Pelin loputtua pause- ja menu-näppäimet siirtävät pois peli ruudusta.
+* Pelin loputtua pause- ja menu-näppäimet siirtävät pois peliruudusta.
 
 ##### Tavallinen peli (_1 Player_ ja _2 Player_)
 
@@ -50,7 +50,7 @@ pallon pystysuuntainen liike kääntyy myös.
 
 * Pallon mennessä maaliin, maalin vastakkaisella puolella oleva pelaaja saa pisteen.
 
-* Jos maali ei saavuta voittoon vaadittavan pistemäärän, kenttä palaa aloitus tilanteeseen ja peli jatkuu pause-näppäintä painamalla.
+* Jos maali ei saavuta voittoon vaadittavaa pistemäärää, kenttä palaa aloitus tilanteeseen ja peli jatkuu pause-näppäintä painamalla.
 
 * Jos maali saavuttaa voittoon vaadittavan pistemäärän, peli loppuu ja pause-näppäintä painamalla pääsee takaisin päävalikkoon.
 
@@ -64,7 +64,7 @@ Punaiset lisävoimat voivat joko hidastaa tai pienentää mailaa. Siniset lisäv
 
 ##### Pallottelupeli (_Rally game_)
 
-![alt text](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/pallotteulukuva.png "Pallottelupeli")
+![alt text](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/pallottelukuva.png "Pallottelupeli")
 
 * Seinään osuessa pelaaja saa pisteen ja pallon nopeus kasvaa.
 
@@ -95,6 +95,6 @@ mahdollista painaa kohtaa _Custom Color_, jolloin saa enemmän muokkaus vaihtoeh
 * Muita pelin asetuksia, jotka vaikuttavan vain tavallisessa pelissä (_1 Player_ ja _2 Player_): mailan nopeutta, pallon nopeutta, pallon nopeutumista, lopetuspistemäärää, 
 lisävoimien käytössä olemista ja tekoälyn vaikeustasoa, voi muuttaa nappia painamalla. Kannatta huomioida, että tekoäly on tehty normaaleja asetuksia miettien.
 
-* Lukuja käsitteleviä asetuksia (nopeus, pisteet, yms.) voi muuttaa vapaammin kirjoittamalla _config.properties_ tiedostoon. Esim. `endingpoint=313`.Jos jokin muutos aiheuttaisi virheen, asetus muutetaan takaisin oletukseen automaattisesti.
+* Lukuja käsitteleviä asetuksia (nopeus, pisteet, yms.) voi muuttaa vapaammin kirjoittamalla _config.properties_ tiedostoon. Esim. `endingpoint=313`. Jos jokin muutos aiheuttaisi virheen, asetus muutetaan takaisin oletukseen automaattisesti.
 
 * _Reset to default_ nappilla voi palauttaa asetukset oletuksiinsa.

@@ -7,13 +7,13 @@
 Ohjelman toiminnallisuus jakautuu neljään paukkaukseen: _tools_, _dao_, _domain_ ja _ui_, jotka ovat ohjelman pohjapakkauksessa _pong_, jossa on myös ohjelman käynnistävä luokka _Pong_. Vaikka 
 kaaviossa _Pong_-luokalla onkin yhteys _dao_ ja _tools_ pakkauksiin, se ei itse tee niillä mitään, vaan pitää niiden sisällä olevia luokkia muistissa.
 
-* Pakkauksessa _ui_ on ohjelman käyttöliittymän toiminta.  
-* Pakkauksessa  _da_ on ohjelman pysyväistallennuksen toiminta.  
-* Pakkauksessa _tools_ on työkaluja eri pakkauksissa olevien luokkien toiminnalle.  
-* Pakkauksessa domain on sovelluslogiikka ja se on jaettu kolmeen pakkaukseen: _games_, _actors_ ja _player_.   
- * Pakkauksessa _games_ on ohjelman pelien toiminta (Tavallinen peli ja pallottelu peli).  
- * Pakkauksessa _actors_ on pelissä näkyvien olioiden toiminta.  
- * Pakkauksess _player_ on pelaajiin liittyvä toiminta.  
+- Pakkauksessa _ui_ on ohjelman käyttöliittymän toiminta.  
+- Pakkauksessa  _da_ on ohjelman pysyväistallennuksen toiminta.  
+- Pakkauksessa _tools_ on työkaluja eri pakkauksissa olevien luokkien toiminnalle.  
+- Pakkauksessa domain on sovelluslogiikka ja se on jaettu kolmeen pakkaukseen: _games_, _actors_ ja _player_.   
+  - Pakkauksessa _games_ on ohjelman pelien toiminta (Tavallinen peli ja pallottelu peli).  
+  - Pakkauksessa _actors_ on pelissä näkyvien olioiden toiminta.  
+  - Pakkauksess _player_ on pelaajiin liittyvä toiminta.  
 
 ### Luokkakaavio
 
@@ -22,11 +22,11 @@ kaaviossa _Pong_-luokalla onkin yhteys _dao_ ja _tools_ pakkauksiin, se ei itse 
 ### Käyttöliittymä
 
 Käyttöliittymä muodostuu _ui_ pakkauksen luokista:  
-* _Options_  
-* _Menu_  
-* _HighscoreScreen_  
-* _NormalGameScreen_  
-* _RallyGameScreen_  
+- _Options_  
+- _Menu_  
+- _HighscoreScreen_  
+- _NormalGameScreen_  
+- _RallyGameScreen_  
 jotka toteuttavat rajapinnan _Screen_. Kaikilla luokilla on oma Scene-olio ja ne ovat yksikerrallaan pääluokan _Pong_ 
 stageen sijoitettuina, eli näkyvänä. Näkymää vaihtaessa luodaan uusi _Screen_-rajapintaa toteuttava luokka, jonka start-metodia kutsutaan, jolloin näkymä vaihdetaan stageen 
 ja peleissä käynnistetään myös AnimationTimer.
@@ -37,19 +37,19 @@ pelien toiminnalle, koska ne pitävä pelin käynnissä ja suorittavat sovellusl
 ### Sovelluslogiikka
 
 Sovelluslogiikka muodostuu _domain_ pakkausessa olevista:  
-* _actors_ pakkauksen luokista:  
- * _Ball_  
- * _Bat_  
- * _Powerup_  
- * _Wall_  
+- _actors_ pakkauksen luokista:  
+  - _Ball_  
+  - _Bat_  
+  - _Powerup_  
+  - _Wall_  
  ja rajapinnnasta _Collisionable_, jota kaikki pakkauksen luokat toteuttavat.  
-* _games_ pakkauksen luokista:  
- * _NormalGame_  
- * _RallyGame_  
-* _player_ pakkauksen luokista:  
- * _Player_  
- * _Human_  
- * _Ai_ 
+- _games_ pakkauksen luokista:  
+  - _NormalGame_  
+  - _RallyGame_  
+- _player_ pakkauksen luokista:  
+  - _Player_  
+  - _Human_  
+  - _Ai_ 
 
 _games_ pakkauksen luokat hallitsevat kokonaisuutta, johon muu _domain_ pakkauksen sisältö kuuluu, vaikka eivät osaakkaan tehdä 
 kaikkea oikeassa järjestyksessä, koska järjestys on hoidettu käyttöliittymän puolella. _NormalGame_ ja _RallyGame_ ohjaavat _Ball_, _Wall_ ja _Powerup_ olioita ja 
@@ -59,14 +59,14 @@ Jokaisella _NormalGameScreen_ ja _RallyGameScreen_:ien AnimationTimer-olion suor
 1. Jos peli ei ole paussilla liikutetaan pelaajien mailoja käyttöliittymän puolen kuuntelijalta saatujen näppäinten painallusten mukaan. Ai liikuttaa mailaa pallon sijainnin mukaan.  
 2. Tarkistetaan onko pause- tai menu-näppäimiä painettu ja onko peli tällä hetkellä paussilla sovelluslogiikan puolella ja toimitaan palautetun arvon mukaisesti käyttöliittymän puolella. 
 Mahdollisia toimintoja on neljä:  
- 1. Ei tehdä mitään.  
- 2. Laitetaan paussiteksti näkyville.  
- 3. Poistetaan paussiteksti näkyvistä.  
- 4. Siirrytään menuun.  
+  1. Ei tehdä mitään.  
+  2. Laitetaan paussiteksti näkyville.  
+  3. Poistetaan paussiteksti näkyvistä.  
+  4. Siirrytään menuun.  
 3. Tarkistetaan taphtuuko törmäyksiä, jossa samalla oli suorittavat törmäyksessä tapahtuvat toiminnot, kuten pallon liikkeen kääntyminen, pallon nopeentuminen ja lisävoiman aktivoituminen.  
 4. Tarkistetaan onko pallo maalissa sovelluslogiikan puolella ja toimitaan palautetun arvon mukaan käyttöliittymän puolella. Mahdollisia tapahtumia on kaksi:  
- 1. Näytetään teksti, joka kertoo toisen voittaneen. Ai:n voittaessa ja pallottelussa, että pelaaja hävisi.
- 2. Näytetään pelin alussa oleva teksti pelin aloittamiselle.  
+  1. Näytetään teksti, joka kertoo toisen voittaneen. Ai:n voittaessa ja pallottelussa, että pelaaja hävisi.
+  2. Näytetään pelin alussa oleva teksti pelin aloittamiselle.  
 5. Hallitaan lisävoimien toimintoja, jos lisävoimat ovat päällä, eli uuden lisävoiman tekeminen, lisävoiman vaikutuksen loppuminen ja lisävoiman katoaminen.  
 6. Jos peli ei ole paussilla, pallon liikuttaminen.
 7. Muutosten piirtäminen ruudulle.
@@ -84,7 +84,7 @@ Ohjelma talleetta asetusten tiedot _config.properties_ tiedostoon ja pistetiedot
 Tiedostojen nimet on määritelty ohjelman pääluokassa _Pong_, kun _dao_ pakkausen luokkia kutsutaan ensimmäisen kerran, minkä takia nimet voi vaihtaa muuttamalla 
 pääluokan koodia.
 
-Asetusten formaatti on `avain=arvo` eikä järjestyksellä ole väliä. Oletus asetukset ovat:
+Asetusten formaatti on `avain=arvo` eikä järjestyksellä ole väliä. Oletusasetukset ovat:
 ```  
 speedUp=1  
 menu=M  

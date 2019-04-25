@@ -54,7 +54,7 @@ JavaDoc komennolla:
 mvn javadoc:javadoc
 ```
 
-JavaDocia löytyy: _target/site/apidocs/index.html_
+JavaDoc löytyy: _target/site/apidocs/index.html_
 
 ### Checkstyle
 
