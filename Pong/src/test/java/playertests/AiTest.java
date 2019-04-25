@@ -105,5 +105,13 @@ public class AiTest {
         int direction = hard.moveBat(0, 0, 10, testBall);
         assertEquals(-1, direction);
     }
+    
+    @Test
+    public void moveBatNormalAndHardCorrectDirectionWhenBallHasNoVerticalMovement() {
+        Ball testBall = new Ball(1, 0, -10, 0, Color.BLACK);
+        testBall.setMovement(new Point2D(1, 0));
+        int direction = hard.moveBat(0, 0, 10, testBall);
+        assertEquals(0, direction);
+    }
 
 }

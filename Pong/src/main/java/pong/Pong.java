@@ -7,19 +7,38 @@ import javafx.stage.Stage;
 import pong.dao.HighscoresDao;
 import pong.tools.Configurations;
 
+/**
+ * Ohjelman pääluokka
+ */
 public class Pong extends Application {
 
-    public static Stage stage;
-    public static Screen screen;
-    public static Configurations config;
-    public static HighscoresDao scoreDao;
+    private static Stage stage;
+    private static Screen screen;
+    private static Configurations config;
+    private static HighscoresDao scoreDao;
 
+    /**
+     * Ohjelman aloittava metodi<br>
+     * Luo asetuksia käsittelevän Configurations olion ja pistetietoja
+     * käsittelevän HighScoreDao olion
+     *
+     * @param args args
+     *
+     * @see pong.dao.HighscoresDao
+     * @see pong.tools.Configurations
+     */
     public static void main(String[] args) {
         config = new Configurations("config.properties");
         scoreDao = new HighscoresDao("jdbc:h2:./highscores");
         launch(Pong.class);
     }
 
+    /**
+     * Käynnistää käyttöliittymän
+     *
+     * @param stage Käyttöliittymän perusta
+     * @throws Exception Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -48,7 +67,4 @@ public class Pong extends Application {
         return scoreDao;
     }
 
-    
-    
-    
 }

@@ -4,7 +4,7 @@ Oma versioni Pong pelistä, joka toimii Ohjelmistotekniikan harjoitustyönä.
 
 ## Dokumentaatio
 
-[Käyttöohje](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+[Asennus- ja käyttöohje](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 [Vaatimusmäärittely](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
@@ -46,6 +46,15 @@ mvn package
 
 Jar löytyy: _target_
 
+### JavaDoc
+
+JavaDoc komennolla:
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia löytyy: _target/site/apidocs/index.html_
 
 ### Checkstyle
 

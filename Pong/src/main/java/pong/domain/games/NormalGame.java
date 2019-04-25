@@ -83,18 +83,12 @@ public class NormalGame {
 
     public int pauseManagement(HashMap<KeyCode, Boolean> pressedButtons) {
         if (pressedButtons.getOrDefault(pauseButton, false) && System.currentTimeMillis() - lastPause >= 100) {
+            powerupPauseTimeManagement();
             lastPause = System.currentTimeMillis();
             if (pause) {
-                if (leftPoints < endingPoint && rightPoints < endingPoint) {
-                    pause = false;
-                    return 0;
-                } else {
-                    return 1;
-                }
-
+                return unpause();
             } else {
-                pause = true;
-                return 2;
+                return pause();
             }
         }
         if (pause && pressedButtons.getOrDefault(menuButton, false)) {
@@ -102,6 +96,29 @@ public class NormalGame {
         }
         return 3;
 
+    }
+
+    private int unpause() {
+        if (leftPoints < endingPoint && rightPoints < endingPoint) {
+            pause = false;
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    private int pause() {
+        pause = true;
+        return 2;
+    }
+
+    private void powerupPauseTimeManagement() {
+        if (pause && this.powerup != null) {
+            if (powerup.activationTime != -1) {
+                this.powerup.activationTime += System.currentTimeMillis() - lastPause;
+            }
+            this.powerup.spawnTime += System.currentTimeMillis() - lastPause;
+        }
     }
 
     public void collisionManagement() {

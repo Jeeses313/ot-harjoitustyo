@@ -1,8 +1,8 @@
 package tooltests;
 
+import java.io.File;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

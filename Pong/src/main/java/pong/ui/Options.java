@@ -13,11 +13,27 @@ import pong.Pong;
 import pong.tools.ComponentCreator;
 import pong.tools.Configurations;
 
+/**
+ * Luokka sisältää pelin asetusruudun käyttöliittymän ja sen toiminnan
+ *
+ * @see pong.ui.Screen
+ */
 public class Options implements Screen {
 
     private Scene options;
     private Configurations configs;
 
+    /**
+     * Luokan konstruktori, joka alustaa näytettävän Scene-olion
+     * ComponentCreator-luokan avulla ja hakee asetuksia käsittelevän
+     * Configurations-olion ohjelman pääluokalta Pong<br>
+     * Scenen sisältö riippuu Configurations-olion tiedoista ja mahdollistaa
+     * tietojen muuttamisen
+     *
+     * @see pong.tools.ComponentCreator
+     * @see pong.Pong
+     * @see pong.tools.Configurations
+     */
     public Options() {
         this.configs = Pong.getConfig();
         Pane components = new Pane();
@@ -31,14 +47,8 @@ public class Options implements Screen {
 
         Label batSpeedLabel = ComponentCreator.createLabel(400, 50, 20, "Bat speed");
         RadioButton slowBatSpeedButton = ComponentCreator.createRadioButton(530, 50, 60, 5, "Slow");
-        slowBatSpeedButton.getStyleClass().remove("radio-button");
-        slowBatSpeedButton.getStyleClass().add("toggle-button");
         RadioButton normalBatSpeedButton = ComponentCreator.createRadioButton(590, 50, 80, 5, "Normal");
-        normalBatSpeedButton.getStyleClass().remove("radio-button");
-        normalBatSpeedButton.getStyleClass().add("toggle-button");
         RadioButton fastBatSpeedButton = ComponentCreator.createRadioButton(670, 50, 60, 5, "Fast");
-        fastBatSpeedButton.getStyleClass().remove("radio-button");
-        fastBatSpeedButton.getStyleClass().add("toggle-button");
         ToggleGroup batSpeedButtons = new ToggleGroup();
         batSpeedButtons.getToggles().addAll(slowBatSpeedButton, normalBatSpeedButton, fastBatSpeedButton);
         int batSpeed = configs.getInt("BatSpeed", 4);
@@ -62,14 +72,8 @@ public class Options implements Screen {
 
         Label ballSpeedLabel = ComponentCreator.createLabel(400, 80, 20, "Ball speed");
         RadioButton slowSpeedButton = ComponentCreator.createRadioButton(530, 80, 60, 5, "Slow");
-        slowSpeedButton.getStyleClass().remove("radio-button");
-        slowSpeedButton.getStyleClass().add("toggle-button");
         RadioButton normalSpeedButton = ComponentCreator.createRadioButton(590, 80, 80, 5, "Normal");
-        normalSpeedButton.getStyleClass().remove("radio-button");
-        normalSpeedButton.getStyleClass().add("toggle-button");
         RadioButton fastSpeedButton = ComponentCreator.createRadioButton(670, 80, 60, 5, "Fast");
-        fastSpeedButton.getStyleClass().remove("radio-button");
-        fastSpeedButton.getStyleClass().add("toggle-button");
         ToggleGroup ballSpeedButtons = new ToggleGroup();
         ballSpeedButtons.getToggles().addAll(slowSpeedButton, normalSpeedButton, fastSpeedButton);
         int ballSpeed = configs.getInt("BallSpeed", 8);
@@ -93,14 +97,8 @@ public class Options implements Screen {
 
         Label ballSpeedUpLabel = ComponentCreator.createLabel(400, 110, 20, "Ball speed up");
         RadioButton speedUpOffButton = ComponentCreator.createRadioButton(530, 110, 60, 5, "None");
-        speedUpOffButton.getStyleClass().remove("radio-button");
-        speedUpOffButton.getStyleClass().add("toggle-button");
         RadioButton normalSpeedUpButton = ComponentCreator.createRadioButton(590, 110, 80, 5, "Normal");
-        normalSpeedUpButton.getStyleClass().remove("radio-button");
-        normalSpeedUpButton.getStyleClass().add("toggle-button");
         RadioButton bigSpeedUpButton = ComponentCreator.createRadioButton(670, 110, 60, 5, "Big");
-        bigSpeedUpButton.getStyleClass().remove("radio-button");
-        bigSpeedUpButton.getStyleClass().add("toggle-button");
         ToggleGroup ballSpeedUpButtons = new ToggleGroup();
         ballSpeedUpButtons.getToggles().addAll(speedUpOffButton, normalSpeedUpButton, bigSpeedUpButton);
         double ballSpeedUp = configs.getDouble("speedUp", 1);
@@ -124,14 +122,8 @@ public class Options implements Screen {
 
         Label endingpointLabel = ComponentCreator.createLabel(400, 140, 20, "Ending point");
         RadioButton onePointButton = ComponentCreator.createRadioButton(530, 140, 60, 5, "1");
-        onePointButton.getStyleClass().remove("radio-button");
-        onePointButton.getStyleClass().add("toggle-button");
         RadioButton threePointButton = ComponentCreator.createRadioButton(590, 140, 80, 5, "3");
-        threePointButton.getStyleClass().remove("radio-button");
-        threePointButton.getStyleClass().add("toggle-button");
         RadioButton fivePointButton = ComponentCreator.createRadioButton(670, 140, 60, 5, "5");
-        fivePointButton.getStyleClass().remove("radio-button");
-        fivePointButton.getStyleClass().add("toggle-button");
         ToggleGroup endingpointButtons = new ToggleGroup();
         endingpointButtons.getToggles().addAll(onePointButton, threePointButton, fivePointButton);
         int endingpoint = configs.getInt("endingpoint", 5);
@@ -155,11 +147,7 @@ public class Options implements Screen {
 
         Label powerupsLabel = ComponentCreator.createLabel(400, 170, 20, "Power-up");
         RadioButton powerupButtonOff = ComponentCreator.createRadioButton(530, 170, 100, 5, "Off");
-        powerupButtonOff.getStyleClass().remove("radio-button");
-        powerupButtonOff.getStyleClass().add("toggle-button");
         RadioButton powerupButtonOn = ComponentCreator.createRadioButton(630, 170, 100, 5, "On");
-        powerupButtonOn.getStyleClass().remove("radio-button");
-        powerupButtonOn.getStyleClass().add("toggle-button");
         ToggleGroup powerupButtons = new ToggleGroup();
         powerupButtons.getToggles().addAll(powerupButtonOff, powerupButtonOn);
         int powerups = configs.getInt("powerups", 0);
@@ -195,14 +183,8 @@ public class Options implements Screen {
 
         Label difficultyLabel = ComponentCreator.createLabel(400, 200, 20, "Ai difficulty");
         RadioButton easyDifficultyButton = ComponentCreator.createRadioButton(530, 200, 60, 5, "Easy");
-        easyDifficultyButton.getStyleClass().remove("radio-button");
-        easyDifficultyButton.getStyleClass().add("toggle-button");
         RadioButton normalDifficultyButton = ComponentCreator.createRadioButton(590, 200, 80, 5, "Normal");
-        normalDifficultyButton.getStyleClass().remove("radio-button");
-        normalDifficultyButton.getStyleClass().add("toggle-button");
         RadioButton hardDifficultyButton = ComponentCreator.createRadioButton(670, 200, 60, 5, "Hard");
-        hardDifficultyButton.getStyleClass().remove("radio-button");
-        hardDifficultyButton.getStyleClass().add("toggle-button");
         ToggleGroup difficultyButtons = new ToggleGroup();
         difficultyButtons.getToggles().addAll(easyDifficultyButton, normalDifficultyButton, hardDifficultyButton);
         int difficulty = configs.getInt("difficulty", 1);
@@ -300,32 +282,35 @@ public class Options implements Screen {
                 });
             });
         });
-        
+
         components.getChildren().addAll(player2downLabel, player2downButton);
-        
+
         Label player1ColourLabel = ComponentCreator.createLabel(10, 270, 20, "Player1");
-        ColorPicker  player1ColorPicker = ComponentCreator.createColourPicker(120, 275, 30, 30, configs.getColor("Player1_colour"));
+        ColorPicker player1ColorPicker = ComponentCreator.createColourPicker(120, 275, 30, 30, configs.getColor("Player1_colour"));
         player1ColorPicker.setOnAction(e -> {
             configs.setColor("Player1_colour", player1ColorPicker.getValue());
         });
-        components.getChildren().addAll(player1ColourLabel,player1ColorPicker);
-        
+        components.getChildren().addAll(player1ColourLabel, player1ColorPicker);
+
         Label player2ColourLabel = ComponentCreator.createLabel(10, 300, 20, "Player2/Ai");
-        ColorPicker  player2ColorPicker = ComponentCreator.createColourPicker(120, 305, 30, 30, configs.getColor("Player2_colour"));
+        ColorPicker player2ColorPicker = ComponentCreator.createColourPicker(120, 305, 30, 30, configs.getColor("Player2_colour"));
         player2ColorPicker.setOnAction(e -> {
             configs.setColor("Player2_colour", player2ColorPicker.getValue());
         });
-        components.getChildren().addAll(player2ColourLabel,player2ColorPicker);
-        
+        components.getChildren().addAll(player2ColourLabel, player2ColorPicker);
+
         Label ballColourLabel = ComponentCreator.createLabel(10, 330, 20, "Ball");
-        ColorPicker  ballColorPicker = ComponentCreator.createColourPicker(120, 335, 30, 30, configs.getColor("Ball_colour"));
+        ColorPicker ballColorPicker = ComponentCreator.createColourPicker(120, 335, 30, 30, configs.getColor("Ball_colour"));
         ballColorPicker.setOnAction(e -> {
             configs.setColor("Ball_colour", ballColorPicker.getValue());
         });
-        components.getChildren().addAll(ballColourLabel,ballColorPicker);
-        
+        components.getChildren().addAll(ballColourLabel, ballColorPicker);
+
     }
 
+    /**
+     * Asettaa konstruktorissa alustetun Scene-olion näytettäväksi
+     */
     @Override
     public void start() {
         Pong.getStage().setScene(options);

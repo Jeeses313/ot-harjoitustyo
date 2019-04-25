@@ -14,10 +14,15 @@ import pong.Pong;
 import pong.domain.actors.Powerup;
 import pong.tools.ComponentCreator;
 
+/**
+ * Luokka sisältää tavallisen pelin ruudun käyttöliittymän ja sen toiminnan
+ *
+ * @see pong.ui.Screen
+ */
 public class NormalGameScreen implements Screen {
 
     private HashMap<KeyCode, Boolean> pressedButtons;
-    
+
     private Pane components;
     private Scene field;
     private Label pauseText;
@@ -28,6 +33,16 @@ public class NormalGameScreen implements Screen {
     private Shape player2Sprite;
     private Shape powerupSprite;
 
+    /**
+     * Luokan konstruktori, joka alustaa näytettävän Scene-olion
+     * ComponentCreator-luokan avulla parametrina saadun NormalGame-olion
+     * perusteella
+     *
+     * @param game Näytettävä peli
+     *
+     * @see pong.tools.ComponentCreator
+     * @see pong.domain.games.NormalGame
+     */
     public NormalGameScreen(NormalGame game) {
         this.game = game;
         this.pressedButtons = new HashMap<>();
@@ -48,6 +63,11 @@ public class NormalGameScreen implements Screen {
         components.getChildren().addAll(player1Sprite, player2Sprite, ballSprite, pauseText, pointsText, powerupSprite);
     }
 
+    /**
+     * Asettaa konstruktorissa alustetun Scene-olion näytettäväksi ja aloittaa
+     * peliä edistävän AnimationTimer-olion, joka pysäytetään ruudusta
+     * poistuessa
+     */
     @Override
     public void start() {
         new AnimationTimer() {
@@ -90,7 +110,7 @@ public class NormalGameScreen implements Screen {
                 game.powerupManagement();
                 Powerup powerup = game.getPowerup();
                 components.getChildren().remove(powerupSprite);
-                if(powerup != null) {
+                if (powerup != null) {
                     powerupSprite = powerup.getSprite();
                     components.getChildren().add(powerupSprite);
                 }

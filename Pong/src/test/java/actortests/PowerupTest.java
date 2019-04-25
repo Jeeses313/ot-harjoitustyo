@@ -127,5 +127,87 @@ public class PowerupTest {
         powerup.activate(p1, p2, ball);
         assertEquals(true, Math.abs(0 - powerup.getSprite().getTranslateX()) <= 0.000001);
     }
+    
+    @Test
+    public void despawnReturnSelfWhenActivatedButTenSecondsHaveNotPassed() {
+        Powerup powerup = new Powerup(0, 0, 5);
+        ball.setMovement(new Point2D(10, 0));
+        powerup.activate(p1, p2, ball);
+        assertEquals(powerup, powerup.despawn(p1, p2, ball));
+    }
+    
+    @Test
+    public void despawnReturnNullWhenActivatedAndTenSecondsHavePassed() {
+        Powerup powerup = new Powerup(0, 0, 5);
+        ball.setMovement(new Point2D(10, 0));
+        powerup.activate(p1, p2, ball);
+        powerup.activationTime = 10100;
+        assertEquals(null, powerup.despawn(p1, p2, ball));
+    }
+    
+    @Test
+    public void deactivateDoesNothingIfNotActivated() {
+        Powerup powerup = new Powerup(0, 0, 0);
+        ball.setMovement(new Point2D(1, 0));
+        powerup.deactivate(p1, p2, ball);
+        assertEquals(-1, powerup.activationTime);
+    }
+    
+    @Test
+    public void deactivateRestoresShrunkBatSize() {
+        Powerup powerup = new Powerup(0, 0, 0);
+        ball.setMovement(new Point2D(1, 0));
+        powerup.activate(p1, p2, ball);
+        powerup.deactivate(p1, p2, ball);
+        assertEquals(true, Math.abs(1.0 - p1.getBat().getSize()) <= 0.000001);
+        assertEquals(true, Math.abs(1.0 - p2.getBat().getSize()) <= 0.000001);
+    }
 
+    @Test
+    public void deactivateRestoresEnlargedBat() {
+        Powerup powerup = new Powerup(0, 0, 1);
+        ball.setMovement(new Point2D(-1, 0));
+        powerup.activate(p1, p2, ball);
+        powerup.deactivate(p1, p2, ball);
+        assertEquals(true, Math.abs(1.0 - p1.getBat().getSize()) <= 0.000001);
+        assertEquals(true, Math.abs(1.0 - p2.getBat().getSize()) <= 0.000001);
+    }
+
+    @Test
+    public void deactivateRestoresSlownDownBat() {
+        ball.setMovement(new Point2D(1, 0));
+        power.activate(p1, p2, ball);
+        power.deactivate(p1, p2, ball);
+        assertEquals(true, Math.abs(10 * 1.0 - p1.getBat().getMovementSpeed()) <= 0.000001);
+        assertEquals(true, Math.abs(10 * 1.0 - p2.getBat().getMovementSpeed()) <= 0.000001);
+    }
+
+    @Test
+    public void deactivateRestoresSpedUpBat() {
+        Powerup powerup = new Powerup(0, 0, 3);
+        ball.setMovement(new Point2D(1, 0));
+        powerup.activate(p1, p2, ball);
+        powerup.deactivate(p1, p2, ball);
+        assertEquals(true, Math.abs(10 * 1.0 - p1.getBat().getMovementSpeed()) <= 0.000001);
+        assertEquals(true, Math.abs(10 * 1.0 - p2.getBat().getMovementSpeed()) <= 0.000001);
+    }
+    
+    @Test
+    public void deactivateRestoresSlownDownBall() {
+        Powerup powerup = new Powerup(0, 0, 4);
+        ball.setMovement(new Point2D(10, 0));
+        powerup.activate(p1, p2, ball);
+        powerup.deactivate(p1, p2, ball);
+        assertEquals(true, Math.abs(10 * 1.0 - ball.getXMovement()) <= 0.000001);
+    }
+    
+    @Test
+    public void deactivateRestoresSpedUpBall() {
+        Powerup powerup = new Powerup(0, 0, 5);
+        ball.setMovement(new Point2D(10, 0));
+        powerup.activate(p1, p2, ball);
+        powerup.deactivate(p1, p2, ball);
+        assertEquals(true, Math.abs(10 * 1.0 - ball.getXMovement()) <= 0.000001);
+    }
+    
 }

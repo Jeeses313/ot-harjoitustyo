@@ -1,5 +1,6 @@
 package daotests;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import javafx.util.Pair;
@@ -69,4 +70,21 @@ public class HigscoresDaoTest {
         }
         assertEquals(false, isIn);
     }
+    
+    @Test
+    public void deleteScoreDeletesOnlyOneScore() {
+        dao.init();
+        dao.insertScore("test", 42);
+        dao.insertScore("test", 42);
+        dao.deleteScore("test", 42);
+        ArrayList<Pair<String, Integer>> testList = dao.getScores();
+        boolean isIn = false;
+        for (Pair testScore : testList) {
+            if (testScore.getKey().equals("test") && Integer.parseInt(testScore.getValue().toString()) == 42) {
+                isIn = true;
+            }
+        }
+        assertEquals(true, isIn);
+    }
+    
 }

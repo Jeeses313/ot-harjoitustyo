@@ -13,6 +13,11 @@ import pong.Pong;
 import pong.domain.games.RallyGame;
 import pong.tools.ComponentCreator;
 
+/**
+ * Luokka sisältää pallottelupelin ruudun käyttöliittymän ja sen toiminnan
+ *
+ * @see pong.ui.Screen
+ */
 public class RallyGameScreen implements Screen {
 
     private HashMap<KeyCode, Boolean> pressedButtons;
@@ -25,6 +30,16 @@ public class RallyGameScreen implements Screen {
     private Shape player1Sprite;
     private Shape wall;
 
+    /**
+     * Luokan konstruktori, joka alustaa näytettävän Scene-olion
+     * ComponentCreator-luokan avulla parametrina saadun RallyGame-olion
+     * perusteella
+     *
+     * @param game Näytettävä peli
+     *
+     * @see pong.tools.ComponentCreator
+     * @see pong.domain.games.RallyGame
+     */
     public RallyGameScreen(RallyGame game) {
         this.game = game;
         this.pressedButtons = new HashMap<>();
@@ -44,6 +59,11 @@ public class RallyGameScreen implements Screen {
         components.getChildren().addAll(player1Sprite, wall, ballSprite, pauseText, pointsText);
     }
 
+    /**
+     * Asettaa konstruktorissa alustetun Scene-olion näytettäväksi ja aloittaa
+     * peliä edistävän AnimationTimer-olion, joka pysäytetään ruudusta
+     * poistuessa
+     */
     @Override
     public void start() {
         new AnimationTimer() {

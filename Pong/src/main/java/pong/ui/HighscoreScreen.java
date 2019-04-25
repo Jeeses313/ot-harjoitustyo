@@ -12,6 +12,11 @@ import pong.Pong;
 import pong.dao.HighscoresDao;
 import pong.tools.ComponentCreator;
 
+/**
+ * Luokka sisältää pelin pistetilastoruudun käyttöliittymän ja sen toiminnan
+ *
+ * @see pong.ui.Screen
+ */
 public class HighscoreScreen implements Screen {
 
     private Scene scene;
@@ -19,6 +24,20 @@ public class HighscoreScreen implements Screen {
     private int currentScore;
     private ArrayList<Pair<String, Integer>> scores;
 
+    /**
+     * Luokan konstruktori, joka alustaa näytettävän Scene-olion
+     * ComponentCreator-luokan avulla<br>
+     * Scenen sisältö riippuu pisteistä, jotka sille kontruktorissa annetaan<br>
+     * Jos pisteitä on enemmän kuin pistetilastoissa olevat pisteet, annetaan
+     * mahdollisuus uusien pistetietojen tallettamiselle<br>
+     * Koska pisteet eivät voi olla negatiivisia, -1 annetaan parametrina, kun
+     * halutaan vain näyttää pisteet
+     *
+     * @param currentScore Pisteet, joilla ruutuun ollaan siirtymässä
+     *
+     * @see pong.tools.ComponentCreator
+     * @see pong.dao.HighscoresDao
+     */
     public HighscoreScreen(int currentScore) {
         Pane components = new Pane();
         scoreDao = Pong.getScoreDao();
@@ -63,7 +82,7 @@ public class HighscoreScreen implements Screen {
                 Label nameLabel = ComponentCreator.createLabel(x, y, 30, score.getKey() + " ");
                 Label scoreLabel = ComponentCreator.createLabel(x + 130, y, 30, " " + score.getValue());
                 components.getChildren().addAll(nameLabel, scoreLabel);
-            } else if(shownScores > 5){
+            } else if (shownScores > 5) {
                 scoreDao.deleteScore(score.getKey().toString(), Integer.parseInt(score.getValue().toString()));
             }
             y += 40;
@@ -78,7 +97,7 @@ public class HighscoreScreen implements Screen {
         });
         components.getChildren().add(backButton);
 
-        Button resetButton = ComponentCreator.createButton(540, 310, 160, 60, "Reset to scores");
+        Button resetButton = ComponentCreator.createButton(540, 310, 160, 60, "Reset scores");
         resetButton.setOnAction(e -> {
             scoreDao.init();
             HighscoreScreen highscore = new HighscoreScreen(-1);
@@ -89,6 +108,9 @@ public class HighscoreScreen implements Screen {
 
     }
 
+    /**
+     * Asettaa konstruktorissa alustetun Scene-olion näytettäväksi
+     */
     @Override
     public void start() {
         Pong.getStage().setScene(scene);

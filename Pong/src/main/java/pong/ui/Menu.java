@@ -9,10 +9,21 @@ import pong.Pong;
 import pong.domain.games.RallyGame;
 import pong.tools.ComponentCreator;
 
+/**
+ * Luokka sisältää pelin valikkoruudun käyttöliittymän ja sen toiminnan
+ *
+ * @see pong.ui.Screen
+ */
 public class Menu implements Screen {
 
     private Scene menu;
 
+    /**
+     * Luokan konstruktori, joka alustaa näytettävän Scene-olion
+     * ComponentCreator-luokan avulla
+     *
+     * @see pong.tools.ComponentCreator
+     */
     public Menu() {
         Pane components = new Pane();
         menu = new Scene(components, Pong.getStage().getWidth(), Pong.getStage().getHeight());
@@ -27,7 +38,7 @@ public class Menu implements Screen {
 
         Button twoplayerButton = ComponentCreator.createButton(400, 160, 100, 40, "2 Player");
         twoplayerButton.setOnAction(e -> {
-            NormalGameScreen game = new NormalGameScreen(new NormalGame(true,Pong.getConfig()));
+            NormalGameScreen game = new NormalGameScreen(new NormalGame(true, Pong.getConfig()));
             Pong.setScreen(game);
             game.start();
         });
@@ -61,6 +72,9 @@ public class Menu implements Screen {
         components.getChildren().addAll(title, singleplayerButton, twoplayerButton, rallyButton, optionsButton, exitButton, highscoresButton);
     }
 
+    /**
+     * Asettaa konstruktorissa alustetun Scene-olion näytettäväksi
+     */
     @Override
     public void start() {
         Pong.getStage().setScene(menu);

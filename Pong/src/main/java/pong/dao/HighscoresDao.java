@@ -10,15 +10,33 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.util.Pair;
 
+/**
+ * Luokka käsittelee tiedostoa, johon pelin pistetiedot on talletettu
+ */
 public class HighscoresDao {
+
     private String path;
 
+    /**
+     * Luokan kostruktori
+     *
+     * @param path Pisteet sisältävän tietokannan nimi/polku
+     */
     public HighscoresDao(String path) {
         this.path = path;
     }
-    
-    
-    
+
+    /**
+     * Palauttaa tiedot pisteistä konstruktoriin annetusta tietokannasta<br>
+     * Jos annettua tietokantaa ei ole tai tapahtuu virhe, luodaan uusi
+     * tietietokanta ja alustetaan se
+     *
+     * @return String-Integer Pair-olioita sisältävä ArrayList, johon on
+     * talletettu tietokannassa olevat tiedot pisteistä
+     *
+     * @see pong.dao.HighscoresDao#init()
+     * @see pong.dao.HighscoresDao#scoresToList(java.sql.ResultSet)
+     */
     public ArrayList<Pair<String, Integer>> getScores() {
         ArrayList<Pair<String, Integer>> scores = new ArrayList<>();
         try {
@@ -44,6 +62,9 @@ public class HighscoresDao {
         return scores;
     }
 
+    /**
+     * Alustaa/palauttaa tietokannan sisällön oletusarvoilla/-arvoihin
+     */
     public void init() {
         try (Connection conn = DriverManager.getConnection(path, "sa", "")) {
             conn.prepareStatement("DROP TABLE Scores IF EXISTS;").executeUpdate();
@@ -58,6 +79,12 @@ public class HighscoresDao {
         insertScore("Bad", 1);
     }
 
+    /**
+     * Lisää tietokantaan annetun pistetiedon
+     *
+     * @param name Pisteet saaneen pelaajan nimi
+     * @param score Saatujen pisteiden määrä
+     */
     public void insertScore(String name, int score) {
         try (Connection conn = DriverManager.getConnection(path, "sa", "")) {
             PreparedStatement state = conn.prepareStatement("INSERT INTO Scores (name, score) VALUES (?, ?)");
@@ -68,9 +95,16 @@ public class HighscoresDao {
         }
     }
 
+    /**
+     * Poistaa tietokannasta annetun pistetiedon<br>
+     * Jos samanlaisia pistetietoja on useampia, poistetaan vain yksi
+     *
+     * @param name Pisteet saaneen pelaajan nimi
+     * @param score Saatujen pisteiden määrä
+     */
     public void deleteScore(String name, int score) {
         try (Connection conn = DriverManager.getConnection(path, "sa", "")) {
-            PreparedStatement state = conn.prepareStatement("DELETE FROM Scores WHERE name = ? AND score = ?");
+            PreparedStatement state = conn.prepareStatement("DELETE FROM Scores WHERE name = ? AND score = ? LIMIT 1");
             state.setString(1, name);
             state.setInt(2, score);
             state.executeUpdate();

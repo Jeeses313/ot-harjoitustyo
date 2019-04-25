@@ -8,11 +8,28 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
 
+/**
+ * Luokka käsittelee tiedostoa, johon pelin asetukset on talletettu
+ */
 public class ConfigurationDao {
 
-    public static Properties properties;
-    public static String fileName;
+    private static Properties properties;
+    private static String fileName;
 
+    /**
+     * Alustaa pelin asetukset Configurations oliota varten annetusta
+     * tiedostosta ja palauttaa tiedot avain-arvo pareina hajautustaulussa<br>
+     * Jos annettua tiedostoa ei ole tai tapahtuu virhe, luodaan uusi tiedosto
+     * ja alustetaan se
+     *
+     * @param file Asetuksia sisältävän tiedoston nimi/polku
+     * @return String-String avain-arvo pareja sisältävä HashMap, johon on
+     * talletettu asetustiedoston sisältö
+     *
+     * @see pong.tools.Configurations
+     * @see pong.dao.ConfigurationDao#fillHashMap()
+     * @see pong.dao.ConfigurationDao#initProperties()
+     */
     public static HashMap<String, String> initConfigurations(String file) {
         fileName = file;
         HashMap<String, String> configs = null;
@@ -28,6 +45,12 @@ public class ConfigurationDao {
         return configs;
     }
 
+    /**
+     * Palauttaa asetustiedoston sisällön avain-arvo pareina hajautustaulussa
+     *
+     * @return String-String avain-arvo pareja sisältävä HashMap, johon on
+     * talletettu asetustiedoston sisältö
+     */
     public static HashMap<String, String> fillHashMap() {
         HashMap<String, String> configs = new HashMap<>();
         try {
@@ -42,6 +65,11 @@ public class ConfigurationDao {
         return configs;
     }
 
+    /**
+     * Aloittaa ja lopettaa asetustiedoston alustuksen
+     *
+     * @see pong.dao.ConfigurationDao#initData()
+     */
     public static void initProperties() {
         try {
             OutputStream output = new FileOutputStream(fileName);
@@ -51,6 +79,9 @@ public class ConfigurationDao {
         }
     }
 
+    /**
+     * Kirjoittaa asetustiedosoon oletusarvot
+     */
     public static void initData() {
         properties.setProperty("difficulty", "1");
         properties.setProperty("pause", "P");
@@ -69,11 +100,27 @@ public class ConfigurationDao {
         properties.setProperty("powerups", "0");
     }
 
+    /**
+     * Palauttaa asetustiedoston arvot oletusarvoihin ja palauttaa tiedot
+     * hajautustaulussa
+     *
+     * @return String-String avain-arvo pareja sisältävä HashMap, johon on
+     * talletettu asetustiedoston sisältö
+     *
+     * @see pong.dao.ConfigurationDao#fillHashMap()
+     * @see pong.dao.ConfigurationDao#initProperties()
+     */
     public static HashMap<String, String> resetConfigurations() {
         initProperties();
         return fillHashMap();
     }
 
+    /**
+     * Asettaa halutun asetustiedoston arvon halutuksi arvoksi
+     *
+     * @param key Asetettavan arvon nimi
+     * @param value Asetettava arvo
+     */
     public static void setProperty(String key, String value) {
         OutputStream output = null;
         try {
