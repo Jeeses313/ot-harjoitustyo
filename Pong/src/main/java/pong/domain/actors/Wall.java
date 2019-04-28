@@ -27,14 +27,14 @@ public class Wall implements Collisionable {
     }
 
     /**
-     * Wall-oliot eivät käsittele törmäyksiä, joten palauttaa aina true
+     * Wall-oliot eivät käsittele törmäyksiä, joten palauttaa aina false
      *
      * @param other Törmäyksen toinen osapuoli
-     * @return true
+     * @return false
      */
     @Override
     public boolean collision(Collisionable other) {
-        return true;
+        return false;
     }
 
     /**

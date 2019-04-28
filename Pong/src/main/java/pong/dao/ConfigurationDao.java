@@ -27,7 +27,6 @@ public class ConfigurationDao {
      * talletettu asetustiedoston sisältö
      *
      * @see pong.tools.Configurations
-     * @see pong.dao.ConfigurationDao#fillHashMap()
      * @see pong.dao.ConfigurationDao#initProperties()
      */
     public static HashMap<String, String> initConfigurations(String file) {
@@ -45,13 +44,7 @@ public class ConfigurationDao {
         return configs;
     }
 
-    /**
-     * Palauttaa asetustiedoston sisällön avain-arvo pareina hajautustaulussa
-     *
-     * @return String-String avain-arvo pareja sisältävä HashMap, johon on
-     * talletettu asetustiedoston sisältö
-     */
-    public static HashMap<String, String> fillHashMap() {
+    private static HashMap<String, String> fillHashMap() {
         HashMap<String, String> configs = new HashMap<>();
         try {
             Enumeration<?> e = properties.propertyNames();
@@ -66,9 +59,7 @@ public class ConfigurationDao {
     }
 
     /**
-     * Aloittaa ja lopettaa asetustiedoston alustuksen
-     *
-     * @see pong.dao.ConfigurationDao#initData()
+     * Kirjoittaa asetustiedostoon asetusten oletusarvot
      */
     public static void initProperties() {
         try {
@@ -79,10 +70,7 @@ public class ConfigurationDao {
         }
     }
 
-    /**
-     * Kirjoittaa asetustiedosoon oletusarvot
-     */
-    public static void initData() {
+    private static void initData() {
         properties.setProperty("difficulty", "1");
         properties.setProperty("pause", "P");
         properties.setProperty("menu", "M");
@@ -102,12 +90,11 @@ public class ConfigurationDao {
 
     /**
      * Palauttaa asetustiedoston arvot oletusarvoihin ja palauttaa tiedot
-     * hajautustaulussa
+     * avain-arvo pareina hajautustaulussa
      *
      * @return String-String avain-arvo pareja sisältävä HashMap, johon on
      * talletettu asetustiedoston sisältö
      *
-     * @see pong.dao.ConfigurationDao#fillHashMap()
      * @see pong.dao.ConfigurationDao#initProperties()
      */
     public static HashMap<String, String> resetConfigurations() {

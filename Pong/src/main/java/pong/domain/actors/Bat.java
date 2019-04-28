@@ -107,14 +107,14 @@ public class Bat implements Collisionable {
     }
 
     /**
-     * Bat-oliot eivät käsittele törmäyksiä, joten palauttaa aina true
+     * Bat-oliot eivät käsittele törmäyksiä, joten palauttaa aina false
      *
      * @param other Törmäyksen toinen osapuoli
-     * @return true
+     * @return false
      */
     @Override
     public boolean collision(Collisionable other) {
-        return true;
+        return false;
     }
 
     /**

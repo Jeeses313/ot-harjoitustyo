@@ -41,8 +41,8 @@ public class WallTest {
     }
     
     @Test
-    public void collisionReturnsTrue() {
-        assertEquals(true, testWall.collision(null));
+    public void collisionReturnsFalse() {
+        assertEquals(false, testWall.collision(null));
     }
     
 }

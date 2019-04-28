@@ -90,8 +90,8 @@ public class BatTest {
     }
     
     @Test
-    public void collisionReturnsTrue() {
-        assertEquals(true, testBat.collision(null));
+    public void collisionReturnsFalse() {
+        assertEquals(false, testBat.collision(null));
     }
     
     @Test
