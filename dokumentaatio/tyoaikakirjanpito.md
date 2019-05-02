@@ -17,5 +17,5 @@
 |24.4 | 5| lisävoimien testejä ja useiden luokkien javadoc|
 |29.4 | 2| lisävoimille uudet muodot ja pelien testien aloitus|
 |1.5 | 3| pelien testit ja pelien ja pelaajien javadoc|
-|2.5 | 1| käyttöliittymään toimintaan liittyvien virheiden korjaus |
+|2.5 | 1| käyttöliittymän toimintaan liittyvien virheiden korjaus |
 |yht. | 46 |  |

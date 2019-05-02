@@ -119,7 +119,7 @@ Esim. Tavallisessa pelissä vasen pelaaja liikuttaa oletusasetuksilla maillaa yl
 Kun vasen pelaaja painaa ylösliikkumisnäppäintään, peliruudun tapahtumakäsittelijä asettaa hajautustauluun pressedButtons painetun näppäimen kohdalle arvon true. 
 Tämän jälkeen saman ruudun AnimationTimerin tekemällä kierrolla, josta kerrotaan enemmän kohdassa sovelluslogiikka, kutsuu pelin sovelluslogiikan puolen metodia moveBats antaen parametriksi 
 painettujen nappien hajautustaulun. Peli hakee pelaajan mailan ja asettaa sen viimeisimmän liikkeen arvoon 0. Tämän jälkeen tarkistetaan onko peli paussilla. Koska peli on käynnissä, peli kutsuu omaa metodiaan 
-vasemman mailaan liikuttamiseksi. Tämän jälkeen tarkistetaan, onko pelaajan nappeja painettu. Koska vasemman pelaajan ylös liikuttavaa nappia on painettu, kerrotaan pelaajalle mihin suuuntaan mailaa kuuluisi liikuttaa 
+vasemman mailan liikuttamiseksi. Tämän jälkeen tarkistetaan, onko pelaajan näppäimiä painettu. Koska vasemman pelaajan ylös liikuttavaa näppäintä on painettu, kerrotaan pelaajalle mihin suuuntaan mailaa kuuluisi liikuttaa 
 (1, eli ylös) ja missä rajoissa (0-400). Pelaaja kutsuu sitten mailan metodia, jossa 
 tarkistetaan voiko maila liikkua haluttuun suuntaan ja liikutetaan sitä. Samalla mailan viimeisimmän liikkeen arvoksi asetetaan liikkeen suunta, eli 1.
 
@@ -127,8 +127,10 @@ Kaaviosta on jätetty pois tilaanteelle epäolennaisia tapahtumia:
 - Pelin moveBats-metodi kutsuu myös moveBat2-metodia, joka liikuttaa oikeaa mailaa.  
 - Pelaajan moveBat-metodi palauttaa myös liikutun suunnan, mutta arvoa ei käytetä.
 
+Pallottelupelissä toimitaan samalla tavalla, mutta ei ole toista pelaajaa.
+
 Toisella pelaajalla, kun tämä on ihminen, toimitaan samalla tavalla. Toisen pelaajan ollessa tekoäly, ei tarkisteta nappien painallusta vaan pelaaja liikuttaa 
-mailaa moveBat-metodissa saadun pallon ja oman vaikeustason mukaan.
+mailaa moveBat-metodissa saadun pallon ja oman vaikeustasonsa mukaan.
 
 Kun pelaaja lopettaa napin painamisen, peliruudun tapahtumakäsittelijä asettaa hajautustauluun pressedButtons painetun näppäimen kohdalle arvon false.
  
