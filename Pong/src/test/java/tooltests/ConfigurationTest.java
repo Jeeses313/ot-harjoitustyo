@@ -1,6 +1,5 @@
 package tooltests;
 
-import java.io.File;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import org.junit.Before;
@@ -15,6 +14,7 @@ public class ConfigurationTest {
     @Before
     public void setUp() {
         config = new Configurations("test.properties");
+        config.resetConfigs();
     }
 
     @Test

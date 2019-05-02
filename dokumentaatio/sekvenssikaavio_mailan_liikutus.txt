@@ -1,0 +1,10 @@
+User -> NormalGameScreen: press "W"
+NormalGameScreen -> NormalGameScreen: pressedButtons.put(W, true)
+NormalGameScreen -> NormalGame: moveBats(pressedButtons)
+NormalGame -> Player1: getBat()
+Player1 --> NormalGame: Player1 bat
+NormalGame -> Player1 bat: setLastMovement(0)
+NormalGame  -> NormalGame: moveBat1(pressedButtons)
+NormalGame -> Player1: moveBat(1, 0, 400, ball)
+Player1 -> Player1 bat:  move(1, 0, 400)
+

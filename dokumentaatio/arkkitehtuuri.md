@@ -8,7 +8,7 @@ Ohjelman toiminnallisuus jakautuu neljään paukkaukseen: _tools_, _dao_, _domai
 kaaviossa _Pong_-luokalla onkin yhteys _dao_ ja _tools_ pakkauksiin, se ei itse tee niillä mitään, vaan pitää niiden sisällä olevia luokkia muistissa.
 
 - Pakkauksessa _ui_ on ohjelman käyttöliittymän toiminta.  
-- Pakkauksessa  _da_ on ohjelman pysyväistallennuksen toiminta.  
+- Pakkauksessa  _dao_ on ohjelman pysyväistallennuksen toiminta.  
 - Pakkauksessa _tools_ on työkaluja eri pakkauksissa olevien luokkien toiminnalle.  
 - Pakkauksessa domain on sovelluslogiikka ja se on jaettu kolmeen pakkaukseen: _games_, _actors_ ja _player_.   
   - Pakkauksessa _games_ on ohjelman pelien toiminta (Tavallinen peli ja pallottelu peli).  
@@ -27,6 +27,7 @@ Käyttöliittymä muodostuu _ui_ pakkauksen luokista:
 - _HighscoreScreen_  
 - _NormalGameScreen_  
 - _RallyGameScreen_  
+
 jotka toteuttavat rajapinnan _Screen_. Kaikilla luokilla on oma Scene-olio ja ne ovat yksikerrallaan pääluokan _Pong_ 
 stageen sijoitettuina, eli näkyvänä. Näkymää vaihtaessa luodaan uusi _Screen_-rajapintaa toteuttava luokka, jonka start-metodia kutsutaan, jolloin näkymä vaihdetaan stageen 
 ja peleissä käynnistetään myös AnimationTimer.
@@ -109,6 +110,28 @@ pistetietoa, koska _HighscoreScreen_ näyttää viisi tai neljä, jos on tehty u
 
 ### Päätoiminnallisuudet
 
+#### Mailan liikuttaminen
+
+Esim. Tavallisessa pelissä vasen pelaaja liikuttaa oletusasetuksilla maillaa ylös, kun maila voi liikkua ylös ja peli on käynnissä:
+
+![alt text](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio_mailan_liikutus.png "Mailan liikutus sekvenssikaavio")
+
+Kun vasen pelaaja painaa ylösliikkumisnäppäintään, peliruudun tapahtumakäsittelijä asettaa hajautustauluun pressedButtons painetun näppäimen kohdalle arvon true. 
+Tämän jälkeen saman ruudun AnimationTimerin tekemällä kierrolla, josta kerrotaan enemmän kohdassa sovelluslogiikka, kutsuu pelin sovelluslogiikan puolen metodia moveBats antaen parametriksi 
+painettujen nappien hajautustaulun. Peli hakee pelaajan mailan ja asettaa sen viimeisimmän liikkeen arvoon 0. Tämän jälkeen tarkistetaan onko peli paussilla. Koska peli on käynnissä, peli kutsuu omaa metodiaan 
+vasemman mailaan liikuttamiseksi. Tämän jälkeen tarkistetaan, onko pelaajan nappeja painettu. Koska vasemman pelaajan ylös liikuttavaa nappia on painettu, kerrotaan pelaajalle mihin suuuntaan mailaa kuuluisi liikuttaa 
+(1, eli ylös) ja missä rajoissa (0-400). Pelaaja kutsuu sitten mailan metodia, jossa 
+tarkistetaan voiko maila liikkua haluttuun suuntaan ja liikutetaan sitä. Samalla mailan viimeisimmän liikkeen arvoksi asetetaan liikkeen suunta, eli 1.
+
+Kaaviosta on jätetty pois tilaanteelle epäolennaisia tapahtumia:  
+- Pelin moveBats-metodi kutsuu myös moveBat2-metodia, joka liikuttaa oikeaa mailaa.  
+- Pelaajan moveBat-metodi palauttaa myös liikutun suunnan, mutta arvoa ei käytetä.
+
+Toisella pelaajalla, kun tämä on ihminen, toimitaan samalla tavalla. Toisen pelaajan ollessa tekoäly, ei tarkisteta nappien painallusta vaan pelaaja liikuttaa 
+mailaa moveBat-metodissa saadun pallon ja oman vaikeustason mukaan.
+
+Kun pelaaja lopettaa napin painamisen, peliruudun tapahtumakäsittelijä asettaa hajautustauluun pressedButtons painetun näppäimen kohdalle arvon false.
+ 
 #### Asetusten muuttaminen
 
 Esim. Kun käyttäjä asetusruudussa "Options" muuttaa vaikeustason vaikeaksi ja pause näppäimen näppäimeksi 'O':

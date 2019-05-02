@@ -1,5 +1,6 @@
 package pong.ui;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import pong.Pong;
@@ -211,6 +213,9 @@ public class Options implements Screen {
         pauseButton.setOnAction(e -> {
             pauseButton.setText("");
             this.options.setOnKeyPressed(key -> {
+                if (key.getCode() == KeyCode.UNDEFINED) {
+                    return;
+                }
                 configs.setKey("pause", key.getCode());
                 pauseButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
@@ -224,6 +229,9 @@ public class Options implements Screen {
         menuButton.setOnAction(e -> {
             menuButton.setText("");
             this.options.setOnKeyPressed(key -> {
+                if (key.getCode() == KeyCode.UNDEFINED) {
+                    return;
+                }
                 configs.setKey("menu", key.getCode());
                 menuButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
@@ -237,6 +245,9 @@ public class Options implements Screen {
         player1upButton.setOnAction(e -> {
             player1upButton.setText("");
             this.options.setOnKeyPressed(key -> {
+                if (key.getCode() == KeyCode.UNDEFINED) {
+                    return;
+                }
                 configs.setKey("Player1_Up", key.getCode());
                 player1upButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
@@ -250,6 +261,9 @@ public class Options implements Screen {
         player1downButton.setOnAction(e -> {
             player1downButton.setText("");
             this.options.setOnKeyPressed(key -> {
+                if (key.getCode() == KeyCode.UNDEFINED) {
+                    return;
+                }
                 configs.setKey("Player1_Down", key.getCode());
                 player1downButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
@@ -263,6 +277,9 @@ public class Options implements Screen {
         player2upButton.setOnAction(e -> {
             player2upButton.setText("");
             this.options.setOnKeyPressed(key -> {
+                if (key.getCode() == KeyCode.UNDEFINED) {
+                    return;
+                }
                 configs.setKey("Player2_Up", key.getCode());
                 player2upButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
@@ -276,6 +293,9 @@ public class Options implements Screen {
         player2downButton.setOnAction(e -> {
             player2downButton.setText("");
             this.options.setOnKeyPressed(key -> {
+                if (key.getCode() == KeyCode.UNDEFINED) {
+                    return;
+                }
                 configs.setKey("Player2_Down", key.getCode());
                 player2downButton.setText(key.getCode().toString());
                 this.options.setOnKeyPressed(k -> {
@@ -306,6 +326,41 @@ public class Options implements Screen {
         });
         components.getChildren().addAll(ballColourLabel, ballColorPicker);
 
+        options.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (pauseButton.getText().equals("")) {
+                    pauseButton.setText(configs.getKey("pause", KeyCode.P).toString());
+                    options.setOnKeyPressed(k -> {
+                    });
+                }
+                if (menuButton.getText().equals("")) {
+                    menuButton.setText(configs.getKey("menu", KeyCode.M).toString());
+                    options.setOnKeyPressed(k -> {
+                    });
+                }
+                if (player1upButton.getText().equals("")) {
+                    player1upButton.setText(configs.getKey("Player1_Up", KeyCode.W).toString());
+                    options.setOnKeyPressed(k -> {
+                    });
+                }
+                if (player1downButton.getText().equals("")) {
+                    player1downButton.setText(configs.getKey("Player1_Down", KeyCode.S).toString());
+                    options.setOnKeyPressed(k -> {
+                    });
+                }
+                if (player2upButton.getText().equals("")) {
+                    player2upButton.setText(configs.getKey("Player2_Up", KeyCode.UP).toString());
+                    options.setOnKeyPressed(k -> {
+                    });
+                }
+                if (player2downButton.getText().equals("")) {
+                    player2downButton.setText(configs.getKey("Player2_Down", KeyCode.DOWN).toString());
+                    options.setOnKeyPressed(k -> {
+                    });
+                }
+            }
+        });
     }
 
     /**

@@ -8,6 +8,20 @@ Sovellus on tennistä/pöytätennistä muistuttava peli, jossa pelaajat liikutta
 
 Sovelluksella on vain yhdenlaisia käyttäjiä, eli normaaleja käyttäjiä tai pelaajia.
 
+### Käyttöliittymä
+
+Sovellus koostuu viidestä näkymästä:
+
+- Päävalikko
+
+- Asetukset
+
+- Pistetilastot
+
+- Tavallinen peli
+
+- Pallottelupeli
+
 ### Toiminnallisuus
 
 #### Perus toiminnalisuus
@@ -16,10 +30,18 @@ Sovelluksella on vain yhdenlaisia käyttäjiä, eli normaaleja käyttäjiä tai 
 
 - Kaksinpeli
 
-- Pelin asetusten muuttaminen. Esim. pistemäärä, johon lopetetaan, ja ohjaukseen käytettävät napit.
+- Pelin asetusten muuttaminen. Esim. pistemäärä, johon lopetetaan, tekoälyn vaikeustaso, värit ja ohjaukseen käytettävät napit.
+
+- Pallottelupeli, jossa lyödään palloa seinää vasten, pallon nopeus kiihtyy ja pisteitä kertyy lyönneistä. Piste-ennätykset voidaan laittaa muistiin.
+
+- Mahdollisuus laittaa asetuksista käyttöön lisävoimat, jotka ilmestyvät pelikentälle ja jotka vaikuttavat viimeksi lyöneeseen pelaajaan jonkin aikaa. Esim. maila pienenee/kasvaa/hidastuu/nopeentuu.
 
 #### Jatkokehitys
 
-- Yksinpelimuoto, jossa lyödään palloa seinää vasten, pallon nopeus kiihtyy ja pisteitä kertyy lyönneistä.
+- LAN-kaksinpeli
 
-- Mahdollisuus laittaa asetuksista käyttöön lisävoimat, jotka ilmestyvät pelikentälle ja jotka vaikuttavat viimeksi lyöneeseen pelaajaan jonkin aikaa. Esim. maila pienenee/kasvaa/hidastuu/nopeentuu.
+- Lisää asetusvaihtoehtoja. Esim. taustan värin muuttaminen.
+
+- Pallottelupelin pisteet talletetaan verkkoon
+
+- Peliruudun koon muuttaminen

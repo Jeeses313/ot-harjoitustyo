@@ -35,7 +35,6 @@ public class HighscoresDao {
      * talletettu tietokannassa olevat tiedot pisteistä
      *
      * @see pong.dao.HighscoresDao#init()
-     * @see pong.dao.HighscoresDao#scoresToList(java.sql.ResultSet)
      */
     public ArrayList<Pair<String, Integer>> getScores() {
         ArrayList<Pair<String, Integer>> scores = new ArrayList<>();

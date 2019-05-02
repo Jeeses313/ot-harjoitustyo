@@ -120,7 +120,7 @@ public class Bat implements Collisionable {
     /**
      * Liikuttaa mailan haluttuun kohtaan
      *
-     * @param y Mailaan uusi sijainti y-akselilla
+     * @param y Mailan uusi sijainti y-akselilla
      */
     public void moveTo(int y) {
         this.yPosition = y;

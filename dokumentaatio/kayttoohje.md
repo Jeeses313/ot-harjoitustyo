@@ -56,9 +56,9 @@ pallon pystysuuntainen liike kääntyy myös.
 
 * Pelin asetuksia voi muuttaa.
 
-* Jos lisävoimat ovat käytössä, pelikentälle ilmestyy erivärisiä kallellaan olevia neliöitä, jotka katoavat, jos niihin osutaan tai jos niihin ei osuta 10s aikana. 
-Siniset ja punaiset lisävoimat vaikuttavat pelaajaan, josta pallon liikkuu poispäin, ja vihreät vaikuttavat palloon. Lisävoiman vaikutuksen kesto on 15s. Vihreät lisävoimat voivat nopeentaa tai hidastaa palloa. 
-Punaiset lisävoimat voivat joko hidastaa tai pienentää mailaa. Siniset lisävoimat voivat joko kasvattaa tai nopeentaa mailaa.
+* Jos lisävoimat ovat käytössä, pelikentälle ilmestyy erivärisiä muotoja, jotka katoavat, jos niihin osutaan tai jos niihin ei osuta 10s aikana. 
+Neliöt ja käännetyt neliöt vaikuttavat pelaajaan, josta pallo liikkuu poispäin, ja ympyrät vaikuttavat palloon. Lisävoiman vaikutuksen kesto on 15s. Vihreät neliöt ja käännetyt neliöt nopeentavat palloa ja mailaa, ja punaiset hidastava. 
+Käännetyt vihreät neliöt kasvattat mailaa, ja punaiset pienentävät.
 
 ![alt text](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/lisavoimakuva.png "Lisävoima")
 
@@ -87,7 +87,7 @@ Voi uudet pisteet kirjata muistiin kirjoittamalla pisteiden kohdalle nimen ja pa
 ![alt text](https://github.com/Jeeses313/ot-harjoitustyo/blob/master/dokumentaatio/asetuskuva.png "Asetukset")
 
 * _Options_ ruudussa voi muuttaa näppäimiä painamalla nappia, jossa lukee tämän hetkisen näppäimen nimi. Tämän jälkeen nimi katoaa ja painamalla jotain näppäintä 
-nappiin tulee painetun näppäimen nimi ja näppäin on vaihdettu.
+nappiin tulee painetun näppäimen nimi ja näppäin on vaihdettu. Joitakin erikoisempia näppäimiä, kuten Å ja Ä, ei voi käyttää, joten niiden painaminen ei tee mitään.
 
 * Pelaajien ja pallon väriä voi vaihtaa painamalla väriruutua kohteen nimen vieressä. Tällöin ilmestyy värivalikko, josta väriä painamalla väri muutetaan. On myös 
 mahdollista painaa kohtaa _Custom Color_, jolloin saa enemmän muokkaus vaihtoehtoja.

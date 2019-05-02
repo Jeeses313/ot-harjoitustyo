@@ -1,6 +1,5 @@
 package daotests;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import javafx.util.Pair;
@@ -16,11 +15,11 @@ public class HigscoresDaoTest {
     @Before
     public void setUp() {
         dao = new HighscoresDao("jdbc:h2:./test");
+        dao.init();
     }
 
     @Test
     public void initializedDatabaseHasCorrectValues() {
-        dao.init();
         ArrayList<Pair<String, Integer>> testList = dao.getScores();
         Collections.sort(testList, (k, l) -> k.getValue() - l.getValue());
         assertEquals(1, Integer.parseInt(testList.get(0).getValue().toString()));
@@ -32,7 +31,6 @@ public class HigscoresDaoTest {
 
     @Test
     public void initializedDatabaseHasCorrectNames() {
-        dao.init();
         ArrayList<Pair<String, Integer>> testList = dao.getScores();
         Collections.sort(testList, (k, l) -> k.getValue() - l.getValue());
         assertEquals("Bad", testList.get(0).getKey());
@@ -44,7 +42,6 @@ public class HigscoresDaoTest {
 
     @Test
     public void insertScoreInsertsScore() {
-        dao.init();
         dao.insertScore("test", 42);
         ArrayList<Pair<String, Integer>> testList = dao.getScores();
         boolean isIn = false;
@@ -55,10 +52,9 @@ public class HigscoresDaoTest {
         }
         assertEquals(true, isIn);
     }
-    
+
     @Test
     public void deleteScoreDeletesScore() {
-        dao.init();
         dao.insertScore("test", 42);
         dao.deleteScore("test", 42);
         ArrayList<Pair<String, Integer>> testList = dao.getScores();
@@ -70,10 +66,9 @@ public class HigscoresDaoTest {
         }
         assertEquals(false, isIn);
     }
-    
+
     @Test
     public void deleteScoreDeletesOnlyOneScore() {
-        dao.init();
         dao.insertScore("test", 42);
         dao.insertScore("test", 42);
         dao.deleteScore("test", 42);
@@ -86,5 +81,5 @@ public class HigscoresDaoTest {
         }
         assertEquals(true, isIn);
     }
-    
+
 }

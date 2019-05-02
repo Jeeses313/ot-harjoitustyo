@@ -66,6 +66,8 @@ public class HighscoreScreen implements Screen {
                     final int nameLength = nameField.getText().length();
                     if (nameLength > 10) {
                         invalidNameLabel.setText("Your name is " + (nameLength - 10) + " characters too long");
+                    } else if (nameLength < 1) {
+                        invalidNameLabel.setText("Name cannot be left empty");
                     } else {
                         scoreDao.insertScore(nameField.getText(), currentScore);
                         HighscoreScreen highscore = new HighscoreScreen(-1);

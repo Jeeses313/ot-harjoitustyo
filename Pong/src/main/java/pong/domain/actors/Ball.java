@@ -138,7 +138,7 @@ public class Ball implements Collisionable {
     }
 
     /**
-     * Liikuttaa pallon haluttuun kohtaan ¨
+     * Liikuttaa pallon haluttuun kohtaan
      *
      * @param x Pallon uusi sijainti x-akselilla
      * @param y Pallon uusi sijainti y-akselilla

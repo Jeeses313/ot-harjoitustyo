@@ -19,7 +19,7 @@ public class Powerup implements Collisionable {
     private boolean shown;
     private int type;
     /**
-     * Aika, joka on kulunut activate-metodin kutsumisesta<br>
+     * Aika, jona activate-metodia kutsuttiin<br>
      * Arvo on -1, jos activate-metodia ei ole kutsuttu
      *
      * @see pong.domain.actors.Powerup#activate(pong.domain.player.Player,
@@ -27,7 +27,7 @@ public class Powerup implements Collisionable {
      */
     public long activationTime;
     /**
-     * Aika, joka on kulunut olion luomisesta
+     * Aika, jona on olio luotiin
      */
     public long spawnTime;
     private Collisionable target;
@@ -214,27 +214,45 @@ public class Powerup implements Collisionable {
     }
 
     /**
-     * Palauttaa oliosta Scene-olioon piirrettävän 45 astetta sivulle käännetyn
-     * ja 20x20 kokoisen ruudun käyttäen ComponentCreator-luokan
-     * createDiamond-metodia<br>
-     * Jos tyyppi on 0 tai 2, ruudun väri on punainen<br>
-     * Jos tyyppi on 1 tai 3, ruudun väri on sininen<br>
-     * Mulloin ruudun väri on vihreä
+     * Palauttaa oliosta Scene-olioon piirrettävän kuvan, jonka muoto riippuu
+     * tyypistä, käyttäen ComponentCreator-luokan metodeja
+     *
+     * Tyyppi&nbsp;&nbsp;&nbsp;&nbsp;Muoto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Väri<br>
+     * 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käännetty
+     * neliö&nbsp;&nbsp;&nbsp;&nbsp;Punainen<br>
+     * 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käännetty
+     * neliö&nbsp;&nbsp;&nbsp;&nbsp;Vihreä<br>
+     * 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neliö&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Punainen<br>
+     * 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neliö&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vihreä<br>
+     * 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ympyrä&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Punainen<br>
+     * 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ympyrä&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vihreä
      *
      * @return Shape-olio, joka vastaa lisävoiman tietoja
      *
      * @see pong.tools.ComponentCreator#createDiamond(double, double,
      * javafx.scene.paint.Color)
+     * @see pong.tools.ComponentCreator#createRectangle(int, int, double,
+     * double, javafx.scene.paint.Color)
+     * @see pong.tools.ComponentCreator#createCircle(int, double, double,
+     * javafx.scene.paint.Color)
      */
     @Override
     public Shape getSprite() {
         if (shown) {
-            if (this.type == 0 || this.type == 2) {
-                return ComponentCreator.createDiamond(this.x, this.y, Color.RED);
-            } else if (this.type == 1 || this.type == 3) {
-                return ComponentCreator.createDiamond(this.x, this.y, Color.BLUE);
-            } else {
-                return ComponentCreator.createDiamond(this.x, this.y, Color.GREEN);
+            switch (this.type) {
+                case 0:
+                    return ComponentCreator.createRectangle(20, 20, x, y, Color.RED);
+                case 1:
+                    return ComponentCreator.createRectangle(20, 20, x, y, Color.GREEN);
+                case 2:
+                    return ComponentCreator.createDiamond(this.x, this.y, Color.RED);
+                case 3:
+                    return ComponentCreator.createDiamond(this.x, this.y, Color.GREEN);
+                case 4:
+                    return ComponentCreator.createCircle(10, x, y, Color.RED);
+                default:
+                    return ComponentCreator.createCircle(10, x, y, Color.GREEN);
+
             }
         }
         return new Rectangle();

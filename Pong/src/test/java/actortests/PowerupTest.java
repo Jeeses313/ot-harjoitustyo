@@ -3,11 +3,12 @@ package actortests;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import pong.domain.actors.Ball;
-import pong.domain.actors.Bat;
 import pong.domain.actors.Powerup;
 import pong.domain.player.Human;
 
@@ -39,11 +40,32 @@ public class PowerupTest {
 
     @Test
     public void getSpriteCorrectColor() {
-        Powerup power2 = new Powerup(0, 1, 1);
-        Powerup power3 = new Powerup(0, 1, 4);
+        Powerup power0 = new Powerup(0, 1, 0);
+        Powerup power1 = new Powerup(0, 1, 1);
+        Powerup power3 = new Powerup(0, 1, 3);
+        Powerup power4 = new Powerup(0, 1, 4);
+        Powerup power5 = new Powerup(0, 1, 5);
+        assertEquals(Color.RED.toString(), power0.getSprite().getFill().toString());
+        assertEquals(Color.GREEN.toString(), power1.getSprite().getFill().toString());
         assertEquals(Color.RED.toString(), power.getSprite().getFill().toString());
-        assertEquals(Color.BLUE.toString(), power2.getSprite().getFill().toString());
         assertEquals(Color.GREEN.toString(), power3.getSprite().getFill().toString());
+        assertEquals(Color.RED.toString(), power4.getSprite().getFill().toString());
+        assertEquals(Color.GREEN.toString(), power5.getSprite().getFill().toString());
+    }
+    
+    @Test
+    public void getSpriteCorrectShape() {
+        Powerup power0 = new Powerup(0, 1, 0);
+        Powerup power1 = new Powerup(0, 1, 1);
+        Powerup power3 = new Powerup(0, 1, 3);
+        Powerup power4 = new Powerup(0, 1, 4);
+        Powerup power5 = new Powerup(0, 1, 5);
+        assertEquals(Rectangle.class, power0.getSprite().getClass());
+        assertEquals(Rectangle.class, power1.getSprite().getClass());
+        assertEquals(Rectangle.class, power0.getSprite().getClass());
+        assertEquals(Rectangle.class, power3.getSprite().getClass());
+        assertEquals(Circle.class, power4.getSprite().getClass());
+        assertEquals(Circle.class, power5.getSprite().getClass());
     }
 
     @Test
@@ -103,7 +125,7 @@ public class PowerupTest {
         assertEquals(true, Math.abs(10 * 1.5 - p1.getBat().getMovementSpeed()) <= 0.000001);
         assertEquals(true, Math.abs(10 * 1.0 - p2.getBat().getMovementSpeed()) <= 0.000001);
     }
-    
+
     @Test
     public void activateSlowsDownBall() {
         Powerup powerup = new Powerup(0, 0, 4);
@@ -111,7 +133,7 @@ public class PowerupTest {
         powerup.activate(p1, p2, ball);
         assertEquals(true, Math.abs(10 * 0.75 - ball.getXMovement()) <= 0.000001);
     }
-    
+
     @Test
     public void activateSpeedUpBall() {
         Powerup powerup = new Powerup(0, 0, 5);
@@ -119,7 +141,7 @@ public class PowerupTest {
         powerup.activate(p1, p2, ball);
         assertEquals(true, Math.abs(10 * 1.25 - ball.getXMovement()) <= 0.000001);
     }
-    
+
     @Test
     public void getSpriteReturnsNewRectangleAfterActivation() {
         Powerup powerup = new Powerup(0, 0, 5);
@@ -127,7 +149,7 @@ public class PowerupTest {
         powerup.activate(p1, p2, ball);
         assertEquals(true, Math.abs(0 - powerup.getSprite().getTranslateX()) <= 0.000001);
     }
-    
+
     @Test
     public void despawnReturnSelfWhenActivatedButTenSecondsHaveNotPassed() {
         Powerup powerup = new Powerup(0, 0, 5);
@@ -135,7 +157,7 @@ public class PowerupTest {
         powerup.activate(p1, p2, ball);
         assertEquals(powerup, powerup.despawn(p1, p2, ball));
     }
-    
+
     @Test
     public void despawnReturnNullWhenActivatedAndTenSecondsHavePassed() {
         Powerup powerup = new Powerup(0, 0, 5);
@@ -144,7 +166,7 @@ public class PowerupTest {
         powerup.activationTime = 10100;
         assertEquals(null, powerup.despawn(p1, p2, ball));
     }
-    
+
     @Test
     public void deactivateDoesNothingIfNotActivated() {
         Powerup powerup = new Powerup(0, 0, 0);
@@ -152,7 +174,7 @@ public class PowerupTest {
         powerup.deactivate(p1, p2, ball);
         assertEquals(-1, powerup.activationTime);
     }
-    
+
     @Test
     public void deactivateRestoresShrunkBatSize() {
         Powerup powerup = new Powerup(0, 0, 0);
@@ -191,7 +213,7 @@ public class PowerupTest {
         assertEquals(true, Math.abs(10 * 1.0 - p1.getBat().getMovementSpeed()) <= 0.000001);
         assertEquals(true, Math.abs(10 * 1.0 - p2.getBat().getMovementSpeed()) <= 0.000001);
     }
-    
+
     @Test
     public void deactivateRestoresSlownDownBall() {
         Powerup powerup = new Powerup(0, 0, 4);
@@ -200,7 +222,7 @@ public class PowerupTest {
         powerup.deactivate(p1, p2, ball);
         assertEquals(true, Math.abs(10 * 1.0 - ball.getXMovement()) <= 0.000001);
     }
-    
+
     @Test
     public void deactivateRestoresSpedUpBall() {
         Powerup powerup = new Powerup(0, 0, 5);
@@ -209,5 +231,5 @@ public class PowerupTest {
         powerup.deactivate(p1, p2, ball);
         assertEquals(true, Math.abs(10 * 1.0 - ball.getXMovement()) <= 0.000001);
     }
-    
+
 }

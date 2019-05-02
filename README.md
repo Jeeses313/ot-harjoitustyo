@@ -18,6 +18,8 @@ Oma versioni Pong pelistä, joka toimii Ohjelmistotekniikan harjoitustyönä.
 
 [Viikko 6](https://github.com/Jeeses313/ot-harjoitustyo/releases/tag/Viikko6)
 
+[Loppupalautus](https://github.com/Jeeses313/ot-harjoitustyo/releases/tag/loppupalautus)
+
 ## Komentorivitoiminnot 
 
 ### Testaus

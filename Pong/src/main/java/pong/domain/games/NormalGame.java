@@ -10,6 +10,9 @@ import pong.domain.player.Human;
 import pong.domain.player.Player;
 import pong.tools.Configurations;
 
+/**
+ * Luokka käsittelee tavallisen pelin toimintoja
+ */
 public class NormalGame {
 
     private int endingPoint;
@@ -22,11 +25,25 @@ public class NormalGame {
     private boolean pause;
     private KeyCode pauseButton;
     private KeyCode menuButton;
-    private long lastPause;
+    /**
+     * Aika, jona pelin tilaa muutettiin paussin ja käynnissä olemisen välillä
+     */
+    public long lastPause;
     private double speedUp;
     private int powerups;
     private Powerup powerup;
 
+    /**
+     * Luokan konstruktori, joka luo pelissä vaaditut oliot, eli mailat ja
+     * pallon
+     *
+     * @param twoPlayers true, jos pelissä on kaksi ihmispelaajaa, ja false, jos
+     * vain yksi
+     * @param config Pelin asetukset sisältävä Configurations-olio
+     *
+     * @see pong.domain.actors.Bat
+     * @see pong.domain.actors.Ball
+     */
     public NormalGame(boolean twoPlayers, Configurations config) {
         this.twoPlayers = twoPlayers;
         this.endingPoint = config.getInt("endingpoint", 5);
@@ -50,6 +67,16 @@ public class NormalGame {
         ball.randomMovement();
     }
 
+    /**
+     * Liikuttaa tekoälypelaajan mailaa ja ihmispelaajien mailoja, jos
+     * liikkumisnäppäimiä on painettu
+     *
+     * @param pressedButtons HashMap, jossa on tieto, onko näppäimiä painettu,
+     * eli true, vai ei, eli false
+     *
+     * @see pong.domain.player.Player#moveBat(int, int, int,
+     * pong.domain.actors.Ball)
+     */
     public void moveBats(HashMap<KeyCode, Boolean> pressedButtons) {
         player1.getBat().setLastMovement(0);
         player2.getBat().setLastMovement(0);
@@ -59,7 +86,7 @@ public class NormalGame {
         }
     }
 
-    public void moveBat1(HashMap<KeyCode, Boolean> pressedButtons) {
+    private void moveBat1(HashMap<KeyCode, Boolean> pressedButtons) {
         if (pressedButtons.getOrDefault(player1.getDown(), false)) {
             player1.moveBat(1, 0, 400, ball);
         }
@@ -68,7 +95,7 @@ public class NormalGame {
         }
     }
 
-    public void moveBat2(HashMap<KeyCode, Boolean> pressedButtons) {
+    private void moveBat2(HashMap<KeyCode, Boolean> pressedButtons) {
         if (twoPlayers) {
             if (pressedButtons.getOrDefault(player2.getDown(), false)) {
                 player2.moveBat(1, 0, 400, ball);
@@ -81,6 +108,25 @@ public class NormalGame {
         }
     }
 
+    /**
+     * Käsittelee pause- ja menu-näppäimien painamisen<br>
+     * Pelin tila muuttuu paussin ja käynnissä olemisen välillä vain, jos
+     * viimeisestä tilan muutoksesta on kulunut 0.1s<br>
+     * Tilan muutumisen yhteydessä muutetaan myös lisävoiman aktivointi- jai
+     * ilmestymisaikoja<br>
+     * Pelin ollessa paussilla, menu-näppäimen painaminen palauttaa arvon, jonka
+     * mukaan siirrytään päävalikkoon<br>
+     * Pelin loputtua menu- tai pause-näppäimen painaminen palauttavat arvon,
+     * jonka mukaan siirrytään päävalikkoon
+     *
+     * @param pressedButtons HashMap, jossa on tieto, onko näppäimiä painettu,
+     * eli true, vai ei, eli false
+     * @return 0, kun peliä jatketaan<br> 1, kun palataan päävalikkoon<br> 2,
+     * kun peli menee paussille<br> 3, kun ei tehdä mitään
+     *
+     * @see pong.domain.actors.Powerup#activationTime
+     * @see pong.domain.actors.Powerup#spawnTime
+     */
     public int pauseManagement(HashMap<KeyCode, Boolean> pressedButtons) {
         if (pressedButtons.getOrDefault(pauseButton, false) && System.currentTimeMillis() - lastPause >= 100) {
             powerupPauseTimeManagement();
@@ -121,6 +167,20 @@ public class NormalGame {
         }
     }
 
+    /**
+     * Tarkistaa tapahtuuko törmäyksiä pallon ja mailan tai pallon ja lisävoiman
+     * välillä<br>
+     * Jos törmäys tapahtuu pallon ja pelaajan välillä, pallon nopeutta
+     * kasvatetaan asetusten mukaisesti<br>
+     * Jos törmäys tapahtuu pallon ja lisävoiman välillä, lisävoima aktivoidaan
+     *
+     * @see pong.domain.actors.Ball#collision(pong.domain.actors.Collisionable)
+     * @see pong.domain.actors.Ball#speedUp(double)
+     * @see
+     * pong.domain.actors.Powerup#collision(pong.domain.actors.Collisionable)
+     * @see pong.domain.actors.Powerup#activate(pong.domain.player.Player,
+     * pong.domain.player.Player, pong.domain.actors.Ball)
+     */
     public void collisionManagement() {
         if (ball.collision(player1.getBat())) {
             ball.speedUp(speedUp);
@@ -133,9 +193,23 @@ public class NormalGame {
                 powerup.activate(player1, player2, ball);
             }
         }
-
     }
 
+    /**
+     * Tarkistaa onko pallo maalissa<br>
+     * Jos pallo on maalissa, peli palautetaan alkuperäiseen tilaan<br>
+     * Jos pallo on vasemmassa maalissa, oikean pelaajan pisteitä kasvatetaan
+     * yhdellä<br>
+     * Jos pallo on oikeassa maalissa, vasemman pelaajan pisteitä kasvatetaan
+     * yhdellä<br>
+     *
+     * @return 0, kun oikea ihmispelaaja voittaa<br> 1, kun tekoäly voittaa<br>
+     * 2, kun vasen pelaaja voittaa<br> 3, kun toinen pelaajista saa pisteen,
+     * mutta peli ei lopu<br> 4 tai 5, kun pallo ei ole maalissa
+     *
+     * @see pong.domain.actors.Ball#inGoal(int, int)
+     * @see pong.domain.games.NormalGame#resetField()
+     */
     public int goalCheck() {
         int action = 4;
         int inGoal = ball.inGoal(0, 800);
@@ -154,7 +228,7 @@ public class NormalGame {
         return 5;
     }
 
-    public int checkPoints() {
+    private int checkPoints() {
         if (rightPoints == endingPoint) {
             if (twoPlayers) {
                 return 0;
@@ -168,6 +242,15 @@ public class NormalGame {
         }
     }
 
+    /**
+     * Palauttaa kentän alkuperäiseen tilaan
+     *
+     * @see pong.domain.actors.Ball#moveTo(double, double)
+     * @see pong.domain.actors.Ball#randomMovement()
+     * @see pong.domain.actors.Bat#moveTo(int)
+     * @see pong.domain.actors.Powerup#deactivate(pong.domain.player.Player,
+     * pong.domain.player.Player, pong.domain.actors.Ball)
+     */
     public void resetField() {
         ball.moveTo(400, 200);
         ball.randomMovement();
@@ -179,6 +262,16 @@ public class NormalGame {
         }
     }
 
+    /**
+     * Käsittelee lisävoimien luomisen ja poistamisen Jos lisävoimat ovat päällä
+     * ja kentällä ei ole lisävoimaa, aktivoituna tai ei, on mahdollista, että
+     * satunnaiseen paikkaan luodaan satunnaisella tyypillä lisävoima<br>
+     * Jos kentällä on lisävoima, aktivoituna tai ei, tarkistetaan kuuluisiko
+     * sen kadota ja lopettaa vaikuttaminen
+     *
+     * @see pong.domain.actors.Powerup#despawn(pong.domain.player.Player,
+     * pong.domain.player.Player, pong.domain.actors.Ball)
+     */
     public void powerupManagement() {
         if (this.powerups < 1 || pause) {
             return;
@@ -192,11 +285,16 @@ public class NormalGame {
         }
     }
 
-    public void spawnPowerup() {
+    private void spawnPowerup() {
         Random rng = new Random(System.currentTimeMillis());
         powerup = new Powerup(rng.nextInt(720) + 40, rng.nextInt(340) + 20, rng.nextInt(6));
     }
 
+    /**
+     * Liikuttaa palloa, jos peli ei ole paussilla
+     *
+     * @see pong.domain.actors.Ball#move(int, int)
+     */
     public void moveBall() {
         if (!pause) {
             ball.move(0, 400);
@@ -233,6 +331,10 @@ public class NormalGame {
 
     public Powerup getPowerup() {
         return powerup;
+    }
+
+    public boolean isPaused() {
+        return pause;
     }
 
 }
